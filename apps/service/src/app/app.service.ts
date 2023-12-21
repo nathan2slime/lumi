@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { DownloadService } from './download/download.service';
 import { ExtractService } from './extract/extract.service';
+import { ExtractData } from './extract/extract.types';
 
 @Injectable()
 export class AppService {
@@ -10,8 +11,8 @@ export class AppService {
     private readonly extractService: ExtractService,
   ) {}
 
-  async parser() {
-    const file = await this.downloadService.download('3001165684-11-2023.pdf');
+  async parser(filename: string): Promise<ExtractData> {
+    const file = await this.downloadService.download(filename);
 
     return await this.extractService.extract(file.path);
   }

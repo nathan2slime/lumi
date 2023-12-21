@@ -16,10 +16,27 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+  describe('/parser (POST)', () => {
+    it('must return the information extracted from the PDF', async () => {
+      const response = await request(app.getHttpServer())
+        .post('/parser')
+        .send({ filename: '321321903821.pdf' });
+
+      expect(response.body).toHaveProperty('energy_without_icms_value');
+      expect(response.body).toHaveProperty('compensed_energy');
+      expect(response.body).toHaveProperty('energy');
+      expect(response.body).toHaveProperty('data');
+    });
+
+    it('should error if PDF not found', async () => {
+      const response = await request(app.getHttpServer())
+        .post('/parser')
+        .send({ filename: expect.anything() });
+
+        const { status, message } = response.body;
+      
+        expect(status).toEqual(404);
+        expect(message).toEqual('file not found');
+    });
   });
 });

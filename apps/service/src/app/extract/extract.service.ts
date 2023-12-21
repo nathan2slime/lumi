@@ -10,19 +10,19 @@ import { fieldParserByRegex, fields } from './utils';
 export class ExtractService {
   constructor() {}
 
-  async extract(file: string) {
+  async extract(file: string): Promise<ExtractData> {
     const pdfParser = new Parser();
     await pdfParser.loadPDF(file);
 
     const res = await (async () =>
-      new Promise((res, rej) => {
+      new Promise<ExtractData>((res, rej) => {
         pdfParser.on('pdfParser_dataError', err => {
           logger.error('error when parsing PDF');
 
           rej(err);
         });
 
-        pdfParser.on('pdfParser_dataReady', data => {
+        pdfParser.on('pdfParser_dataReady', async data => {
           const texts = data.Pages[0].Texts;
 
           res(this.parser(texts));
@@ -36,7 +36,7 @@ export class ExtractService {
     return res;
   }
 
-  async parser(texts: Text[]) {
+  parser(texts: Text[]): ExtractData {
     try {
       const extract: ExtractData = {};
 
@@ -52,12 +52,13 @@ export class ExtractService {
             ? fieldParserByRegex(uri, value.regex)
             : decodeURIComponent(uri).trim();
 
-          extract[field.name][key] = text.replace(',', '.');
+          extract[field.name][key] = text && text.replace(',', '.');
         });
       });
 
       return extract;
     } catch (error) {
+      logger.error((error as Error).message);
       new Error('unable to extract data');
     }
   }

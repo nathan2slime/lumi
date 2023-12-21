@@ -41,14 +41,16 @@ export const fields: DataField[] = [
     name: 'data',
     data: {
       total_price: {
-        index: 35,
+        index: 131,
+        regex: /([\d,]+)[\s%20]*$/
       },
       client: {
         index: 118,
         regex: /[\s]*([\d]+)[^\d]*$/,
       },
       expiresIn: {
-        index: 108,
+        regex: /\b(\d{1,2}\/\d{1,2}\/\d{4})\b/,
+        index: 131,
       },
     },
   },

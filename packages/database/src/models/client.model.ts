@@ -1,8 +1,7 @@
-import { Column, Entity, JoinTable, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 
 import { BaseModelEntity } from './base.model';
 import { UserEntity } from './user.model';
-
 
 @Entity({
   name: 'clients',
