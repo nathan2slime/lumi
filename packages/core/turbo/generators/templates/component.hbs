@@ -1,0 +1,10 @@
+import { {{ pascalCase name }}Props } from './model';
+import { {{ pascalCase name}}Styled } from './styles'
+
+export const {{ pascalCase name }} = ({ children, ...props }: {{ pascalCase name }}Props) => {  
+  return (
+    <{{ pascalCase name}}Styled {...props}>
+      {children}
+    </{{ pascalCase name}}Styled>
+  );
+};

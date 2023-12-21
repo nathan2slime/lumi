@@ -1,0 +1,9 @@
+{
+  "name": "@lumi/firebase",
+  "description": "Firebase",
+  "version": "0.0.1",
+  "private": true,
+  "files": [
+    "firebase.json"
+  ]
+}

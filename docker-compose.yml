@@ -1,0 +1,26 @@
+services:
+  app:
+    image: lumi
+    container_name: lumi
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: yarn start
+    env_file:
+      - ./.env.prod
+    expose:
+      - 7878:7878
+      - 9797:8585
+    ports:
+      - 7878:7878
+      - 9797:8585
+    networks:
+      - lumi
+    volumes:
+      - .:/app/
+      - /app/node_modules/
+
+networks:
+  lumi:
+    name: dbmysql
+    external: true

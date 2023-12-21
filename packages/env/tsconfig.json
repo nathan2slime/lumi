@@ -1,0 +1,9 @@
+{
+  "extends": "@lumi/tsconfig/base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "baseUrl": "."
+  },
+  "include": ["index.ts"],
+  "exclude": ["node_modules"]
+}

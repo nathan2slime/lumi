@@ -1,0 +1,17 @@
+{
+  "name": "@lumi/log",
+  "description": "Log",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "private": true,
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
+  "devDependencies": {
+    "tsup": "^6.5.0",
+    "typescript": "latest",
+    "winston": "^3.11.0"
+  }
+}
