@@ -15,7 +15,9 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Post('parser')
-  async parser(@Body() data: ParserFile): Promise<ExtractedData | HttpException> {
+  async parser(
+    @Body() data: ParserFile,
+  ): Promise<ExtractedData | HttpException> {
     try {
       return await this.appService.parser(data.file_name);
     } catch (error) {

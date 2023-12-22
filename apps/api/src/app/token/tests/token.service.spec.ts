@@ -14,6 +14,4 @@ describe('TokenService', () => {
   afterEach(() => {
     jest.restoreAllMocks();
   });
-
-  
 });

@@ -13,7 +13,7 @@ export class AppService {
 
   async parser(filename: string): Promise<ExtractedData> {
     const file = await this.downloadService.download(filename);
-    
+
     return await this.extractService.extract(file.path);
   }
 }

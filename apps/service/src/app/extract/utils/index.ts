@@ -58,6 +58,6 @@ export const fields: DataField[] = [
 
 export const fieldParserByRegex = (field: string, regex: RegExp): string => {
   const res = decodeURIComponent(field).match(regex);
-  
+
   return res && res[1];
 };
