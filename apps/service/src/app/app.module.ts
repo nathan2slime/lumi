@@ -10,7 +10,11 @@ import { ExtractModule } from './extract/extract.module';
 import { ExtractService } from './extract/extract.service';
 
 @Module({
-  imports: [HealthModule, ExtractModule, DownloadModule],
+  imports: [
+    HealthModule,
+    ExtractModule,
+    DownloadModule
+  ],
   controllers: [AppController],
   providers: [AppService, DownloadService, ExtractService],
 })
