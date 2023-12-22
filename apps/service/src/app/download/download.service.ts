@@ -4,6 +4,8 @@ import { FirebaseAdmin, InjectFirebaseAdmin } from 'nestjs-firebase';
 
 @Injectable()
 export class DownloadService {
+  downloadService: typeof jest;
+
   constructor(
     @InjectFirebaseAdmin() private readonly firebase: FirebaseAdmin,
   ) {}
@@ -27,6 +29,8 @@ export class DownloadService {
       return { path: destination, id };
     } catch (error) {
       logger.error(error);
+
+      throw new Error('file not found');
     }
   }
 }

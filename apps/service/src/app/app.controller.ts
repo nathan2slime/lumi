@@ -1,14 +1,27 @@
-import { Controller, Get } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpException,
+  HttpStatus,
+  Post,
+} from '@nestjs/common';
 
 import { AppService } from './app.service';
-import { DownloadService } from './download/download.service';
+import { ParserFile } from './app.types';
+import { ExtractData } from './extract/extract.types';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get('parser')
-  async parser() {
-    return await this.appService.parser();
+  @Post('parser')
+  async parser(
+    @Body() data: ParserFile,
+  ): Promise<ExtractData | HttpException> {
+    try {
+      return await this.appService.parser(data.filename);
+    } catch (error) {
+      return new HttpException((error as Error).message, HttpStatus.NOT_FOUND);
+    }
   }
 }

@@ -10,6 +10,7 @@
     "dev": "dotenv -- turbo run dev",
     "gen": "graphql-codegen",
     "test:e2e": "dotenv -- turbo run test:e2e",
+    "test:cov": "dotenv -- turbo run test:cov",
     "commit": "git-cz",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },

@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { logger } from '@lumi/log';
 import { env } from '@lumi/env';
+import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 import { AppModule } from './app/app.module';
@@ -18,6 +19,7 @@ const bootstrap = async () => {
   app.enableCors({
     origin: true,
   });
+  app.useGlobalPipes(new ValidationPipe());
 
   const config = new DocumentBuilder()
     .setTitle('PDF Data Extractor')
