@@ -2,8 +2,6 @@ import { TestBed } from '@automock/jest';
 
 import { DownloadService } from '../download.service';
 
-jest.mock('firebase-admin');
-
 describe('DownloadService', () => {
   let downloadService: DownloadService;
 

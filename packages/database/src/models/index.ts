@@ -13,3 +13,8 @@ export const entities = [
 ];
 
 export * from './base.model';
+export * from './permission.model';
+export * from './user.model';
+export * from './client.model';
+export * from './role.model';
+export * from './token.model';

@@ -5,8 +5,6 @@ import { AppService } from '../app.service';
 import { DownloadService } from '../download/download.service';
 import { ExtractService } from '../extract/extract.service';
 
-jest.mock('firebase-admin');
-
 describe('AppModule', () => {
   let module: TestingModule;
   let appController: AppController;
@@ -26,19 +24,14 @@ describe('AppModule', () => {
     extractService = module.get<ExtractService>(ExtractService);
   });
 
-  it('should have defined the app controller', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('should have defined', () => {
     expect(appController).toBeDefined();
-  });
-
-  it('should have defined the download service', () => {
     expect(downloadService).toBeDefined();
-  });
-
-  it('should have defined the app service', () => {
     expect(appService).toBeDefined();
-  });
-
-  it('should have defined the extract service', () => {
     expect(extractService).toBeDefined();
   });
 });

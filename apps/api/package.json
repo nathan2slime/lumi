@@ -8,11 +8,10 @@
     "start": "nest start",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./tests/jest-e2e.json"
   },
   "dependencies": {
     "@nestjs/apollo": "^12.0.11",
@@ -35,6 +34,7 @@
     "@lumi/env": "*",
     "@lumi/log": "*",
     "@lumi/tsconfig": "*",
+    "@nestjs/jwt": "^10.2.0",
     "@types/bcryptjs": "^2",
     "@types/express": "^4.17.17",
     "@types/graphql-upload": "^16",

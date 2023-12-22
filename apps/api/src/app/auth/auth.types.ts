@@ -15,3 +15,13 @@ export class SignUpInput {
   @Field()
   password: string;
 }
+
+@ObjectType()
+@InputType()
+export class SignInInput {
+  @Field()
+  email: string;
+
+  @Field()
+  password: string;
+}

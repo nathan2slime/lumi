@@ -20,7 +20,7 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 scalar DateTime
 
 type Mutation {
-  SignUp: User!
+  SignUp(data: SignUpInput!): User!
 }
 
 type Permission {
@@ -43,6 +43,13 @@ type Role {
   permissions: Permission!
   updated_at: DateTime
   user: User!
+}
+
+input SignUpInput {
+  email: String!
+  name: String!
+  password: String!
+  surname: String!
 }
 
 type Token {
