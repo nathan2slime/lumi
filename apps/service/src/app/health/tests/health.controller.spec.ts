@@ -1,10 +1,8 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import {
   DiskHealthIndicator,
   HealthCheckResult,
   HealthCheckService,
   MemoryHealthIndicator,
-  TerminusModule,
 } from '@nestjs/terminus';
 import { TestBed } from '@automock/jest';
 

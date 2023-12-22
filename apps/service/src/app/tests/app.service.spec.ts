@@ -5,8 +5,6 @@ import { DownloadService } from '../download/download.service';
 import { ExtractService } from '../extract/extract.service';
 import { ExtractedData } from '../extract/extract.types';
 
-jest.mock('firebase-admin');
-
 describe('AppService', () => {
   let appService: AppService;
   let downloadService: DownloadService;

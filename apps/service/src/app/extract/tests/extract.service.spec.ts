@@ -5,8 +5,6 @@ import Parser, { Text } from 'pdf2json';
 import { ExtractService } from '../extract.service';
 import { ExtractedData } from '../extract.types';
 
-jest.mock('pdf2json');
-
 describe('ExtractService', () => {
   let extractService: ExtractService;
   let parser: Parser;

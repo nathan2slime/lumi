@@ -5,8 +5,6 @@ import { AppController } from '../app.controller';
 import { AppService } from '../app.service';
 import { ExtractedData } from '../extract/extract.types';
 
-jest.mock('firebase-admin');
-
 describe('AppController', () => {
   let appController: AppController;
   let appService: AppService;
