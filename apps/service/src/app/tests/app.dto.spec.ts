@@ -4,6 +4,10 @@ import { validate } from 'class-validator';
 import { ParserFile } from '../app.dto';
 
 describe('ParserFile', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
   it('should be defined', async () => {
     const data = { file_name: expect.anything() };
 

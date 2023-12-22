@@ -1,7 +1,3 @@
-beforeEach(() => {
-  jest.mock('firebase-admin');
-  jest.mock('pdf2json');
-  jest.mock('@lumi/env', () => ({ env: process.env }));
-});
-
-afterEach(() => jest.clearAllMocks());
+jest.mock('firebase-admin');
+jest.mock('pdf2json');
+jest.mock('@lumi/env', () => ({ env: process.env }));

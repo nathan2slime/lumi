@@ -3,7 +3,7 @@ import { fieldParserByRegex } from '../../utils';
 describe('Extract', () => {
   describe('utils', () => {
     afterEach(() => {
-      jest.clearAllMocks();
+      jest.restoreAllMocks();
     });
 
     it('should return decoded URL', () => {

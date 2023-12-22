@@ -16,7 +16,7 @@ describe('ExtractService', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   describe('extract', () => {

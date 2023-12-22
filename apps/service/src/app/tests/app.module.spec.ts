@@ -24,6 +24,10 @@ describe('AppModule', () => {
     extractService = module.get<ExtractService>(ExtractService);
   });
 
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
   it('should have defined', () => {
     expect(appController).toBeDefined();
     expect(downloadService).toBeDefined();

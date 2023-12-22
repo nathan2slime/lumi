@@ -13,6 +13,10 @@ describe('ExtractModule', () => {
     extractModule = module.get<ExtractModule>(ExtractModule);
   });
 
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
   it('should have defined the extract module', () => {
     expect(extractModule).toBeDefined();
   });

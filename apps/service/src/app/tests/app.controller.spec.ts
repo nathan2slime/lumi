@@ -39,6 +39,10 @@ describe('AppController', () => {
     appService = unitRef.get<AppService>(AppService);
   });
 
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
   it('should have defined', () => {
     expect(appService).toBeDefined();
     expect(appController).toBeDefined();

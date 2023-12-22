@@ -13,6 +13,10 @@ describe('DownloadModule', () => {
     downloadModule = module.get<DownloadModule>(DownloadModule);
   });
 
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
   it('should have defined', () => {
     expect(downloadModule).toBeDefined();
   });
