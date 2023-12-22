@@ -5,6 +5,8 @@ import { AppService } from '../app.service';
 import { DownloadService } from '../download/download.service';
 import { ExtractService } from '../extract/extract.service';
 
+jest.mock('firebase-admin');
+
 describe('AppModule', () => {
   let module: TestingModule;
   let appController: AppController;
@@ -19,10 +21,6 @@ describe('AppModule', () => {
         AppService,
         DownloadService,
         ExtractService,
-        {
-          provide: 'FIREBASE_TOKEN',
-          useValue: expect.anything(),
-        },
       ],
     }).compile();
 
