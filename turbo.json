@@ -19,6 +19,7 @@
       "cache": false
     },
     "test": {
+      "persistent": true,
       "cache": false
     },
     "test:cov": {
