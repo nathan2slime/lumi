@@ -7,7 +7,7 @@
     "dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "test": "jest --config ./jest.config.json --verbose",
+    "test": "jest  --runInBand --config ./jest.config.json --verbose",
     "test:watch": "jest --watch --verbose",
     "test:cov": "jest --coverage --verbose",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
