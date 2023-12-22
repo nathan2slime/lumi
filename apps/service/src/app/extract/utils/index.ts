@@ -42,7 +42,7 @@ export const fields: DataField[] = [
     data: {
       total_price: {
         index: 131,
-        regex: /([\d,]+)[\s%20]*$/
+        regex: /([\d,]+)[\s%20]*$/,
       },
       client: {
         index: 118,
@@ -58,6 +58,6 @@ export const fields: DataField[] = [
 
 export const fieldParserByRegex = (field: string, regex: RegExp): string => {
   const res = decodeURIComponent(field).match(regex);
-  
+
   return res && res[1];
 };

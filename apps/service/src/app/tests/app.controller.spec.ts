@@ -39,11 +39,7 @@ describe('AppController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [AppController],
-      providers: [
-        AppService,
-        DownloadService,
-        ExtractService,
-      ],
+      providers: [AppService, DownloadService, ExtractService],
     }).compile();
 
     appController = module.get<AppController>(AppController);

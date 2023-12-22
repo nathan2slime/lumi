@@ -17,11 +17,7 @@ describe('AppModule', () => {
   beforeEach(async () => {
     module = await Test.createTestingModule({
       controllers: [AppController],
-      providers: [
-        AppService,
-        DownloadService,
-        ExtractService,
-      ],
+      providers: [AppService, DownloadService, ExtractService],
     }).compile();
 
     appController = module.get<AppController>(AppController);

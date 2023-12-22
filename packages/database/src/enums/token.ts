@@ -2,7 +2,7 @@ import { registerEnumType } from 'type-graphql';
 
 export enum TokenEnum {
   AUTHORIZATION = 'AUTHORIZATION',
-  NOTIFICATION = 'NOTIFICATION'
+  NOTIFICATION = 'NOTIFICATION',
 }
 
 registerEnumType(TokenEnum, {
