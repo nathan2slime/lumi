@@ -4,6 +4,8 @@
   "version": "0.0.1",
   "private": true,
   "files": [
-    "firebase.json"
+    "firebase.dev.json",
+    "firebase.example.json",
+    "firebase.prod.json"
   ]
 }
