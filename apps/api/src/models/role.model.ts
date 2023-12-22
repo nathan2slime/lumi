@@ -13,6 +13,6 @@ export class Role extends BaseModel {
   @Field(() => User)
   user: User;
 
-  @Field(() => Permission, { defaultValue: []})
+  @Field(() => Permission, { defaultValue: [] })
   permissions: Permission[];
 }

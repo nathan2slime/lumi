@@ -1,20 +1,13 @@
 import { logger } from '@lumi/log';
 import { Injectable } from '@nestjs/common';
-import { FirebaseAdmin, InjectFirebaseAdmin } from 'nestjs-firebase';
+
+import { firebase } from '../firebase';
 
 @Injectable()
 export class DownloadService {
-  downloadService: typeof jest;
-
-  constructor(
-    @InjectFirebaseAdmin() private readonly firebase: FirebaseAdmin,
-  ) {}
-
   async download(file: string, extension: string = '.pdf') {
     try {
-      logger.info('loading storage bucket');
-
-      const bucket = this.firebase.storage.bucket();
+      const bucket = firebase.storage().bucket();
       const id = Math.random();
 
       const path = '/' + id + extension;

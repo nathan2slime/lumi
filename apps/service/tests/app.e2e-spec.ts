@@ -33,10 +33,10 @@ describe('AppController (e2e)', () => {
         .post('/parser')
         .send({ filename: expect.anything() });
 
-        const { status, message } = response.body;
-      
-        expect(status).toEqual(404);
-        expect(message).toEqual('file not found');
+      const { status, message } = response.body;
+
+      expect(status).toEqual(404);
+      expect(message).toEqual('file not found');
     });
   });
 });

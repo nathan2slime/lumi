@@ -7,6 +7,8 @@ import { DownloadService } from '../download/download.service';
 import { ExtractService } from '../extract/extract.service';
 import { ExtractData } from '../extract/extract.types';
 
+jest.mock('firebase-admin');
+
 describe('AppController', () => {
   let appController: AppController;
   let appService: AppService;
@@ -37,15 +39,7 @@ describe('AppController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [AppController],
-      providers: [
-        AppService,
-        DownloadService,
-        ExtractService,
-        {
-          provide: 'FIREBASE_TOKEN',
-          useValue: expect.anything(),
-        },
-      ],
+      providers: [AppService, DownloadService, ExtractService],
     }).compile();
 
     appController = module.get<AppController>(AppController);
