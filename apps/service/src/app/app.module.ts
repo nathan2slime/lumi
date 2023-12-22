@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { FirebaseModule } from 'nestjs-firebase';
-import { env } from '@lumi/env';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -13,10 +11,6 @@ import { ExtractService } from './extract/extract.service';
 
 @Module({
   imports: [
-    FirebaseModule.forRoot({
-      googleApplicationCredential: require('@lumi/firebase/firebase.json'),
-      storageBucket: env.FIREBASE_STORAGE_BUCKET
-    }),
     HealthModule,
     ExtractModule,
     DownloadModule
