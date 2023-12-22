@@ -7,10 +7,8 @@ import { firebase } from '../firebase';
 export class DownloadService {
   async download(file: string, extension: string = '.pdf') {
     try {
-      
       const bucket = firebase.storage().bucket();
       const id = Math.random();
-      
 
       const path = '/' + id + extension;
       const destination = __dirname + path;
@@ -24,7 +22,7 @@ export class DownloadService {
       return { path: destination, id };
     } catch (error) {
       logger.error(error);
-      
+
       throw new Error('file not found');
     }
   }
