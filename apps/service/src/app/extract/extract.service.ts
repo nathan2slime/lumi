@@ -3,19 +3,19 @@ import { Injectable } from '@nestjs/common';
 import Parser, { Text } from 'pdf2json';
 import fs from 'fs';
 
-import { ExtractData } from './extract.types';
+import { ExtractedData } from './extract.types';
 import { fieldParserByRegex, fields } from './utils';
 
 @Injectable()
 export class ExtractService {
   constructor() {}
 
-  async extract(file: string): Promise<ExtractData> {
+  async extract(file: string): Promise<ExtractedData> {
     const pdfParser = new Parser();
     await pdfParser.loadPDF(file);
 
     const res = await (async () =>
-      new Promise<ExtractData>((res, rej) => {
+      new Promise<ExtractedData>((res, rej) => {
         pdfParser.on('pdfParser_dataError', err => {
           logger.error('error when parsing PDF');
 
@@ -24,7 +24,7 @@ export class ExtractService {
 
         pdfParser.on('pdfParser_dataReady', async data => {
           const texts = data.Pages[0].Texts;
-
+          
           res(this.parser(texts));
         });
       }))();
@@ -36,9 +36,9 @@ export class ExtractService {
     return res;
   }
 
-  parser(texts: Text[]): ExtractData {
+  parser(texts: Text[]): ExtractedData {
     try {
-      const extract: ExtractData = {};
+      const extract: ExtractedData = {};
 
       logger.info('extracting data from PDF');
 

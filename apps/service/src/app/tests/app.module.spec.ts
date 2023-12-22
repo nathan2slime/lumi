@@ -26,19 +26,10 @@ describe('AppModule', () => {
     extractService = module.get<ExtractService>(ExtractService);
   });
 
-  it('should have defined the app controller', () => {
+  it('should have defined', () => {
     expect(appController).toBeDefined();
-  });
-
-  it('should have defined the download service', () => {
     expect(downloadService).toBeDefined();
-  });
-
-  it('should have defined the app service', () => {
     expect(appService).toBeDefined();
-  });
-
-  it('should have defined the extract service', () => {
     expect(extractService).toBeDefined();
   });
 });

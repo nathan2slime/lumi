@@ -1,11 +1,9 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { TestBed } from '@automock/jest';
 
 import { AppController } from '../app.controller';
 
 import { AppService } from '../app.service';
-import { DownloadService } from '../download/download.service';
-import { ExtractService } from '../extract/extract.service';
-import { ExtractData } from '../extract/extract.types';
+import { ExtractedData } from '../extract/extract.types';
 
 jest.mock('firebase-admin');
 
@@ -13,7 +11,7 @@ describe('AppController', () => {
   let appController: AppController;
   let appService: AppService;
 
-  const mockPayload: ExtractData = {
+  const mockPayload: ExtractedData = {
     energy_without_icms_value: {
       amount: '1.007',
       unit_price: '0.86613683',
@@ -36,21 +34,23 @@ describe('AppController', () => {
     },
   };
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [AppController],
-      providers: [AppService, DownloadService, ExtractService],
-    }).compile();
+  beforeEach(() => {
+    const { unit, unitRef } = TestBed.create(AppController).compile();
 
-    appController = module.get<AppController>(AppController);
-    appService = module.get<AppService>(AppService);
+    appController = unit;
+    appService = unitRef.get<AppService>(AppService);
+  });
+
+  it('should have defined', () => {
+    expect(appService).toBeDefined();
+    expect(appController).toBeDefined();
   });
 
   describe('parser', () => {
     it('must return values extracted from the PDF', async () => {
       jest.spyOn(appService, 'parser').mockResolvedValue(mockPayload);
 
-      const data = await appController.parser({ filename: expect.anything() });
+      const data = await appController.parser({ file_name: expect.anything() });
 
       expect(data).toBe(mockPayload);
       expect(appService.parser).toHaveBeenCalled();
@@ -61,7 +61,7 @@ describe('AppController', () => {
         .spyOn(appService, 'parser')
         .mockRejectedValue(new Error('file not found'));
 
-      const data = await appController.parser({ filename: expect.anything() });
+      const data = await appController.parser({ file_name: expect.anything() });
 
       expect(data.message).toBe('file not found');
       expect(appService.parser).toHaveBeenCalled();

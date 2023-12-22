@@ -1,10 +1,10 @@
-export type ExtractData = Record<string, Record<string, number | string>>;
+export type ExtractedData = Record<string, Record<string, number | string>>;
 export type DataField = {
   name: string;
-  data: Record<string, DataParse>;
+  data: Record<string, ConfigDataParser>;
 };
 
-export type DataParse = {
+export type ConfigDataParser = {
   index: number;
   regex?: RegExp;
 };

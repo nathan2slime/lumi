@@ -426,6 +426,56 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@automock/adapters.nestjs@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@automock/adapters.nestjs@npm:2.1.0"
+  dependencies:
+    "@automock/common": "npm:^3.1.0"
+    "@automock/types": "npm:^2.0.1"
+    reflect-metadata: "npm:^0.1.13"
+  checksum: 74e5b081221968edc16a35ca141be0d97b455ae4b94e0a2922d10de559d91a2b26cc55c364ece20d8cbae4701ebcbc449d22f804cf72b1b53ae8c48e6886b28a
+  languageName: node
+  linkType: hard
+
+"@automock/common@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@automock/common@npm:3.1.0"
+  dependencies:
+    "@automock/types": "npm:^2.0.1"
+  checksum: 633bed52c1180f1e0dd893c135d4d946b404217c6a9aa2aa727eee163d3dfe97c97855ee3ac66a86deab5fa695771c2578b3f64253e6985b0d2e8267930f0e21
+  languageName: node
+  linkType: hard
+
+"@automock/core@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@automock/core@npm:2.1.0"
+  dependencies:
+    "@automock/common": "npm:^3.1.0"
+    "@automock/types": "npm:^2.0.1"
+    lodash.isequal: "npm:^4.5.0"
+  checksum: c12dd8cfb366b10e66eea68cd9f425bc177718ab4b1698264a569593326a69d2d8220ed64d23871eebac1b3ae397e9402ff7dfc95c992d7677da9b064ee7770b
+  languageName: node
+  linkType: hard
+
+"@automock/jest@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@automock/jest@npm:2.1.0"
+  dependencies:
+    "@automock/core": "npm:^2.1.0"
+    "@automock/types": "npm:^2.0.1"
+  peerDependencies:
+    jest: ^26 || ^27 || ^28 || ^29
+  checksum: 8fe49f39bae6f3decf7d0d295d5d80b6e8da97cf373ab07f52b0fb13728b9218d2a13f2821a0abd2ee6b6989c47f7c25cf16cc006ccc503ecc561f39f7a1cffa
+  languageName: node
+  linkType: hard
+
+"@automock/types@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@automock/types@npm:2.0.1"
+  checksum: 3f7193fb1ad1a5de9e333158fc603086e6d306d583c84d0f209d03f556f2f05766e64b03076e6a37162e15ec38812f65617e5c5722e02cc5893bb40b4255d86f
+  languageName: node
+  linkType: hard
+
 "@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.12.13, @babel/code-frame@npm:^7.16.7, @babel/code-frame@npm:^7.22.13, @babel/code-frame@npm:^7.23.5":
   version: 7.23.5
   resolution: "@babel/code-frame@npm:7.23.5"
@@ -3247,6 +3297,7 @@ __metadata:
     "@nestjs/common": "npm:^10.0.0"
     "@nestjs/core": "npm:^10.0.0"
     "@nestjs/graphql": "npm:^12.0.11"
+    "@nestjs/jwt": "npm:^10.2.0"
     "@nestjs/platform-express": "npm:^10.0.0"
     "@nestjs/schematics": "npm:^10.0.0"
     "@nestjs/testing": "npm:^10.0.0"
@@ -3350,6 +3401,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@lumi/service@workspace:apps/service"
   dependencies:
+    "@automock/adapters.nestjs": "npm:^2.1.0"
+    "@automock/jest": "npm:^2.1.0"
     "@lumi/database": "npm:*"
     "@lumi/env": "npm:*"
     "@lumi/firebase": "npm:*"
@@ -3589,6 +3642,18 @@ __metadata:
     ts-morph:
       optional: true
   checksum: b71a87c7977eec2df8e188812d7906887fb982992670da6786aa23a46b0d6a861533f982edbda601c2b30d8609ec6cf6e135a7c9411f4e91d006e8ded4081354
+  languageName: node
+  linkType: hard
+
+"@nestjs/jwt@npm:^10.2.0":
+  version: 10.2.0
+  resolution: "@nestjs/jwt@npm:10.2.0"
+  dependencies:
+    "@types/jsonwebtoken": "npm:9.0.5"
+    jsonwebtoken: "npm:9.0.2"
+  peerDependencies:
+    "@nestjs/common": ^8.0.0 || ^9.0.0 || ^10.0.0
+  checksum: 481880f45458bd7153c47d4cfd903e1b681eb80130b5686ae6996f3bc5c6d5f1a06138317997e7a676c87c6e647a710f21554ab1606b60fc2dd2f8a2a216e884
   languageName: node
   linkType: hard
 
@@ -4761,7 +4826,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jsonwebtoken@npm:^9.0.2":
+"@types/jsonwebtoken@npm:9.0.5, @types/jsonwebtoken@npm:^9.0.2":
   version: 9.0.5
   resolution: "@types/jsonwebtoken@npm:9.0.5"
   dependencies:
@@ -11097,7 +11162,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsonwebtoken@npm:^9.0.0":
+"jsonwebtoken@npm:9.0.2, jsonwebtoken@npm:^9.0.0":
   version: 9.0.2
   resolution: "jsonwebtoken@npm:9.0.2"
   dependencies:
@@ -11380,6 +11445,13 @@ __metadata:
   version: 3.0.3
   resolution: "lodash.isboolean@npm:3.0.3"
   checksum: b70068b4a8b8837912b54052557b21fc4774174e3512ed3c5b94621e5aff5eb6c68089d0a386b7e801d679cd105d2e35417978a5e99071750aa2ed90bffd0250
+  languageName: node
+  linkType: hard
+
+"lodash.isequal@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "lodash.isequal@npm:4.5.0"
+  checksum: 82fc58a83a1555f8df34ca9a2cd300995ff94018ac12cc47c349655f0ae1d4d92ba346db4c19bbfc90510764e0c00ddcc985a358bdcd4b3b965abf8f2a48a214
   languageName: node
   linkType: hard
 

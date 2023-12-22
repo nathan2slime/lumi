@@ -14,18 +14,8 @@ export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
   @Mutation(() => User, { name: 'SignUp' })
-  async signup(
-    @Ctx() ctx: ContextDataType,
-    // @Arg('data') data: SignUpInput,
-  ): Promise<User> {
-    return {
-      clients: [],
-      email: '',
-      name: '',
-      roles: [],
-      tokens: [],
-      surname: '',
-    };
+  async signup(@Arg('data') data: SignUpInput): Promise<User> {
+    return await this.authService.signup(data);
   }
 
   @Query(() => User, { name: 'Auth' })

@@ -4,5 +4,5 @@ import { IsNotEmpty } from 'class-validator';
 export class ParserFile {
   @ApiProperty()
   @IsNotEmpty()
-  filename: string;
+  file_name: string;
 }
