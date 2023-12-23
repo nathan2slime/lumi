@@ -4,7 +4,7 @@ import * as admin from 'firebase-admin';
 const config = {
   production: '@lumi/firebase/firebase.prod.json',
   test: '@lumi/firebase/firebase.example.json',
-  dev: '@lumi/firebase/firebase.dev.json',
+  development: '@lumi/firebase/firebase.dev.json',
 };
 
 export const firebase = admin.initializeApp({

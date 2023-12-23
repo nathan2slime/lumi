@@ -3281,7 +3281,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lumi/api@workspace:apps/api":
+"@lumi/api@npm:*, @lumi/api@workspace:apps/api":
   version: 0.0.0-use.local
   resolution: "@lumi/api@workspace:apps/api"
   dependencies:
@@ -3472,6 +3472,17 @@ __metadata:
 "@lumi/tsconfig@npm:*, @lumi/tsconfig@workspace:packages/tsconfig":
   version: 0.0.0-use.local
   resolution: "@lumi/tsconfig@workspace:packages/tsconfig"
+  languageName: unknown
+  linkType: soft
+
+"@lumi/types@workspace:packages/types":
+  version: 0.0.0-use.local
+  resolution: "@lumi/types@workspace:packages/types"
+  dependencies:
+    "@lumi/api": "npm:*"
+    "@lumi/tsconfig": "npm:*"
+    tsup: "npm:^6.7.0"
+    typescript: "npm:latest"
   languageName: unknown
   linkType: soft
 

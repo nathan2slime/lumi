@@ -8,6 +8,7 @@ import { env } from '@lumi/env';
 
 import { AuthModule } from './auth/auth.module';
 import { TokenModule } from './token/token.module';
+import { UserModule } from './user/user.module';
 
 import { AuthService } from './auth/auth.service';
 
@@ -21,13 +22,14 @@ import { ContextPayloadType } from '../guard/types';
       driver: ApolloDriver,
       inject: [AuthService],
       imports: [
-        AuthModule,
-        TokenModule,
         JwtModule.register({
           global: true,
           secret: env.TOKEN_HASH,
           signOptions: { expiresIn: '740h' },
         }),
+        TokenModule,
+        UserModule,
+        AuthModule,
       ],
       useFactory: async (authService: AuthService) => {
         const isDev = env.NODE_ENV == 'development';
@@ -35,9 +37,12 @@ import { ContextPayloadType } from '../guard/types';
         return {
           context: (ctx: ContextPayloadType) =>
             getAuthContext(ctx, authService),
-          validate: false,
+          validate: {
+            always: true,
+          },
           debug: isDev,
-          playground: true,
+          introspection: true,
+          playground: {},
           credentials: false,
           authChecker: customAuthChecker,
           emitSchemaFile: {
