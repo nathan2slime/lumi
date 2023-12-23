@@ -23,5 +23,5 @@ const bootstrap = async () => {
 };
 
 bootstrap().then(() =>
-  logger.info('app successfully started: http://localhost:' + port),
+  logger.info(`app successfully started: http://localhost:${port}/graphql`),
 );

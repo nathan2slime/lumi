@@ -3,10 +3,11 @@ import { Field, InputType, ObjectType } from 'type-graphql';
 import { Client } from './client.model';
 import { Token } from './token.model';
 import { Role } from './role.model';
+import { BaseModel } from './base.model';
 
 @ObjectType()
 @InputType()
-export class User {
+export class User extends BaseModel {
   @Field()
   name: string;
 
@@ -16,12 +17,12 @@ export class User {
   @Field()
   email: string;
 
-  @Field(() => Role, { defaultValue: [] })
+  @Field(() => [Role], { defaultValue: [], nullable: true })
   roles: Role[];
 
-  @Field(() => Token, { defaultValue: [] })
+  @Field(() => [Token], { defaultValue: [] })
   tokens: Token[];
 
-  @Field(() => Client, { defaultValue: [] })
+  @Field(() => [Client], { defaultValue: [], nullable: true })
   clients: Client[];
 }

@@ -1,0 +1,17 @@
+{
+    "name": "@lumi/types",
+    "version": "0.0.1",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "license": "MIT",
+    "scripts": {
+        "build": "tsup",
+        "dev": "tsup --watch"
+    },
+    "devDependencies": {
+        "@lumi/api": "*",
+        "@lumi/tsconfig": "*",
+        "tsup": "^6.7.0",
+        "typescript": "latest"
+    }
+}

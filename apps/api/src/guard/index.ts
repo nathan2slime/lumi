@@ -1,4 +1,5 @@
 import { AuthChecker } from 'type-graphql';
+import { logger } from '@lumi/log';
 
 import { AuthService } from '../app/auth/auth.service';
 
@@ -13,12 +14,12 @@ export const getAuthContext = (
 });
 
 export const customAuthChecker: AuthChecker<ContextDataType> = async (
-  { context: { token, authService } },
+  { context: { token, authService }, info: { operation } },
   _roles,
 ) => {
-  //   const user = await authService.authorization(token);
+  logger.info('checking user authorization', { operation });
 
-  //   return !!user;
+  const user = await authService.authorization(token);
 
-  return true;
+  return !!user;
 };

@@ -1,5 +1,4 @@
-import { BeforeInsert, Column, Entity, OneToMany } from 'typeorm';
-import { hash } from 'bcryptjs';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 import { BaseModelEntity } from './base.model';
 import { RoleEntity } from './role.model';
@@ -31,9 +30,4 @@ export class UserEntity extends BaseModelEntity {
 
   @OneToMany(() => ClientEntity, client => client.user)
   clients: ClientEntity[];
-
-  @BeforeInsert()
-  async before() {
-    if (this.password) this.password = await hash(this.password, 10);
-  }
 }

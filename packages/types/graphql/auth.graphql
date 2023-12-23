@@ -1,0 +1,83 @@
+mutation SignUp($data: SignUpInput!) {
+  SignUp(data: $data) {
+    email
+    name
+    surname
+    tokens {
+      id
+      value
+      type
+      created_at
+      updated_at
+      deleted_at
+    }
+    roles {
+      id
+      name
+      created_at
+      deleted_at
+      updated_at
+      permissions {
+        name
+        id
+      }
+    }
+  }
+}
+
+mutation SignIn($data: SignInInput!) {
+  SignIn(data: $data) {
+    id
+    name
+    surname
+    email
+    roles {
+      id
+      created_at
+      updated_at
+      deleted_at
+      name
+      permissions {
+        name
+        id
+      }
+    }
+    tokens {
+      id
+      created_at
+      updated_at
+      deleted_at
+      type
+      value
+    }
+  }
+}
+
+query Auth {
+  Auth {
+    id
+    name
+    surname
+    email
+    roles {
+      id
+      created_at
+      updated_at
+      deleted_at
+      name
+      permissions {
+        name
+        id
+      }
+    }
+    tokens {
+      id
+      created_at
+      updated_at
+      deleted_at
+      type
+      value
+    }
+  }
+}
+
