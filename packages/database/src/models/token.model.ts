@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne, Relation } from 'typeorm';
 
 import { BaseModelEntity } from './base.model';
 import { TokenEnum } from '../enums';
@@ -20,5 +20,5 @@ export class TokenEntity extends BaseModelEntity {
   type: TokenEnum;
 
   @ManyToOne(() => UserEntity, user => user.tokens)
-  user: UserEntity;
+  user: Relation<UserEntity>;
 }

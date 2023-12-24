@@ -28,7 +28,7 @@ describe('AppController', () => {
     data: {
       total_price: null,
       client: null,
-      expiresIn: null,
+      due_date: null,
     },
   };
 

@@ -1,14 +1,6 @@
-import { createLogger, format, transports } from 'winston';
-
-const { metadata } = format;
+import { createLogger } from 'bunyan';
 
 export const logger = createLogger({
-  defaultMeta: {
-    label: 'app',
-  },
-  transports: [
-    new transports.Console({
-      format: metadata(),
-    }),
-  ],
+  name: 'app',
+  stream: process.stdout,
 });

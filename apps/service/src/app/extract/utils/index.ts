@@ -8,7 +8,7 @@ export const fields: DataField[] = [
         index: 22,
       },
       unit_price: {
-        index: 17,
+        index: 23,
       },
       price: {
         index: 24,
@@ -22,7 +22,7 @@ export const fields: DataField[] = [
         index: 22,
       },
       unit_price: {
-        index: 17,
+        index: 29,
       },
       price: {
         index: 30,
@@ -41,16 +41,16 @@ export const fields: DataField[] = [
     name: 'data',
     data: {
       total_price: {
-        index: 131,
+        index: 128,
         regex: /([\d,]+)[\s%20]*$/,
       },
       client: {
-        index: 118,
-        regex: /[\s]*([\d]+)[^\d]*$/,
+        index: 125,
+        regex: /(\d+)/,
       },
-      expiresIn: {
+      due_date: {
         regex: /\b(\d{1,2}\/\d{1,2}\/\d{4})\b/,
-        index: 131,
+        index: 128,
       },
     },
   },

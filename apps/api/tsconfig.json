@@ -2,7 +2,7 @@
   "extends": "@lumi/tsconfig/nestjs.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "baseUrl": "."
+    "baseUrl": "./src"
   },
   "exclude": ["node_modules", "dist", "coverage"]
 }

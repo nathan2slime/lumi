@@ -8,6 +8,7 @@
     "clean": "rm -rf node_modules",
     "start": "dotenv -- turbo run start",
     "dev": "dotenv -- turbo run dev",
+    "prod": "dotenv -- turbo run prod",
     "gen": "graphql-codegen",
     "test:e2e": "dotenv -- turbo run test:e2e",
     "test:cov": "dotenv -- turbo run test:cov",
@@ -28,8 +29,10 @@
     "@graphql-codegen/typescript-react-apollo": "^3.3.7",
     "@graphql-codegen/typescript-resolvers": "^3.2.1",
     "@lumi/tsconfig": "*",
+    "@types/bunyan": "^1",
     "@types/node": "^20.10.5",
     "axios": "^1.4.0",
+    "bunyan": "^1.8.15",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "dotenv-cli": "^7.1.0",
@@ -41,8 +44,7 @@
     "ts-node": "^10.9.1",
     "tsup": "^6.7.0",
     "turbo": "latest",
-    "typescript": "latest",
-    "winston": "^3.10.0"
+    "typescript": "latest"
   },
   "engines": {
     "node": ">=18.0.0"

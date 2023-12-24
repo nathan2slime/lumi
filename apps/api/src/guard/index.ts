@@ -14,12 +14,26 @@ export const getAuthContext = (
 });
 
 export const customAuthChecker: AuthChecker<ContextDataType> = async (
-  { context: { token, authService }, info: { operation } },
+  { context: { token, authService }, info },
   _roles,
 ) => {
+  const operation = info.operation.name.value;
   logger.info('checking user authorization', { operation });
 
   const user = await authService.authorization(token);
 
-  return !!user;
+  const authorizedRoles = user.roles.filter(
+    role =>
+      !!role.permissions.find(permission => _roles.includes(permission.name)),
+  );
+
+  const isAuthorized = authorizedRoles.length > 0;
+
+  if (isAuthorized) {
+    logger.info('start operation', operation);
+  } else {
+    logger.error('user does not have authorization', { operation });
+  }
+
+  return isAuthorized;
 };

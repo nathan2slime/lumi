@@ -10,8 +10,9 @@
     "dev": "tsup --watch"
   },
   "devDependencies": {
+    "@types/bunyan": "^1",
+    "bunyan": "^1.8.15",
     "tsup": "^6.5.0",
-    "typescript": "latest",
-    "winston": "^3.11.0"
+    "typescript": "latest"
   }
 }

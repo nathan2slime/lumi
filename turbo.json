@@ -20,13 +20,12 @@
     "test": {
       "cache": false
     },
+    "prod": {},
     "test:cov": {
-      "cache": false,
-      "persistent": true
+      "cache": false
     },
     "test:e2e": {
-      "cache": false,
-      "persistent": true
+      "cache": false
     },
     "dev": {
       "cache": false,

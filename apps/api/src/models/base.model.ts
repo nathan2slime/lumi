@@ -1,5 +1,7 @@
 import { Field, InputType, ObjectType } from 'type-graphql';
 
+import './enums';
+
 @ObjectType()
 @InputType()
 export class BaseModel {

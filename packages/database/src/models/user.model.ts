@@ -1,5 +1,7 @@
 import { Column, Entity, OneToMany } from 'typeorm';
 
+import type { Relation } from 'typeorm';
+
 import { BaseModelEntity } from './base.model';
 import { RoleEntity } from './role.model';
 import { TokenEntity } from './token.model';
@@ -23,11 +25,11 @@ export class UserEntity extends BaseModelEntity {
   password: string;
 
   @OneToMany(() => RoleEntity, roles => roles.user)
-  roles: RoleEntity[];
+  roles: Relation<RoleEntity[]>;
 
   @OneToMany(() => TokenEntity, token => token.user)
-  tokens: TokenEntity[];
+  tokens: Relation<TokenEntity[]>;
 
   @OneToMany(() => ClientEntity, client => client.user)
-  clients: ClientEntity[];
+  clients: Relation<ClientEntity[]>;
 }

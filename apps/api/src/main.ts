@@ -6,7 +6,7 @@ import 'reflect-metadata';
 
 import { AppModule } from './app/app.module';
 
-const port = env.APP_API_PORT || 9292;
+const port = env.PORT || env.APP_API_PORT || 9292;
 
 const bootstrap = async () => {
   const app = await NestFactory.create(AppModule, {
