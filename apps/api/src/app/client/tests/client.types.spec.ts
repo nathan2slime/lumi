@@ -1,11 +1,13 @@
 import { plainToClass } from 'class-transformer';
 import { faker } from '@faker-js/faker/locale/en';
 
-import 'reflect-metadata';
-
 import { ClientInput, UpdateClientInput } from '../client.types';
 
 describe('client types', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
   describe('ClientInput', () => {
     let data: ClientInput;
     const payload = {

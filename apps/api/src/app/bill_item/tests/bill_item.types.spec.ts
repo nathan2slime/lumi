@@ -1,11 +1,13 @@
 import { plainToClass } from 'class-transformer';
 import { faker } from '@faker-js/faker/locale/en';
 
-import 'reflect-metadata';
-
 import { BillItemInput, UpdateBillItemInput } from '../bill_item.types';
 
 describe('bill item types', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
   describe('BillItemInput', () => {
     let data: BillItemInput;
     const payload = {

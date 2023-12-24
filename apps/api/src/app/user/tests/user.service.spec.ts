@@ -77,7 +77,7 @@ describe('UserService', () => {
     });
   });
 
-  describe('getById', () => {
+  describe('findById', () => {
     it('must return user by id', async () => {
       const user = {} as UserEntity;
       const id = Math.random().toString();
@@ -88,7 +88,7 @@ describe('UserService', () => {
           async (options: FindOneOptions<UserEntity>) => user,
         );
 
-      const res = await userService.getById(id);
+      const res = await userService.findById(id);
 
       expect(userRepository.findOne).toHaveBeenCalledWith({
         where: { id },
@@ -112,7 +112,7 @@ describe('UserService', () => {
           async (options: FindOneOptions<UserEntity>) => null,
         );
 
-      const res = await userService.getById(id);
+      const res = await userService.findById(id);
 
       expect(userRepository.findOne).toHaveBeenCalledWith({
         where: { id },
@@ -136,14 +136,14 @@ describe('UserService', () => {
           return new Error(error) as unknown as UserEntity;
         });
 
-      const user = await userService.getById(expect.any(String));
+      const user = await userService.findById(expect.any(String));
 
       expect(user).toMatchObject({ message: error });
       expect(userRepository.findOne).toHaveBeenCalled();
     });
   });
 
-  describe('getByEmail', () => {
+  describe('findByEmail', () => {
     const email = faker.internet.email().toLowerCase();
 
     it('must return user by email', async () => {
@@ -155,7 +155,7 @@ describe('UserService', () => {
           async (options: FindOneOptions<UserEntity>) => user,
         );
 
-      const res = await userService.getByEmail(email);
+      const res = await userService.findByEmail(email);
 
       expect(userRepository.findOne).toHaveBeenCalledWith({
         where: { email },
@@ -177,7 +177,7 @@ describe('UserService', () => {
           async (_options: FindOneOptions<UserEntity>) => null,
         );
 
-      const res = await userService.getByEmail(email);
+      const res = await userService.findByEmail(email);
 
       expect(userRepository.findOne).toHaveBeenCalledWith({
         where: { email },
@@ -201,7 +201,7 @@ describe('UserService', () => {
           return new Error(error) as unknown as UserEntity;
         });
 
-      const user = await userService.getByEmail(email);
+      const user = await userService.findByEmail(email);
 
       expect(user).toMatchObject({ message: error });
       expect(userRepository.findOne).toHaveBeenCalled();

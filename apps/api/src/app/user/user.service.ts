@@ -42,7 +42,7 @@ export class UserService {
     }
   }
 
-  async getById(id: string) {
+  async findById(id: string) {
     try {
       const user = await this.userRepository.findOne({
         where: { id },
@@ -71,7 +71,7 @@ export class UserService {
     }
   }
 
-  async getByEmail(email: string) {
+  async findByEmail(email: string) {
     try {
       const user = await this.userRepository.findOne({
         where: { email: email.toLowerCase() },
