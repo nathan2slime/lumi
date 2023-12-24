@@ -1,7 +1,8 @@
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany, Relation } from 'typeorm';
 
 import { BaseModelEntity } from './base.model';
 import { UserEntity } from './user.model';
+import { BillEntity } from './bill.model';
 
 @Entity({
   name: 'clients',
@@ -11,11 +12,14 @@ export class ClientEntity extends BaseModelEntity {
   @Column({ unique: true })
   number: number;
 
-  @Column({ unique: true })
+  @Column({ nullable: true })
   installation: number;
 
   @ManyToOne(() => UserEntity, user => user.clients)
-  user: UserEntity;
+  user: Relation<UserEntity>;
+
+  @OneToMany(() => BillEntity, bill => bill.client)
+  bills: Relation<BillEntity[]>;
 
   @Column({ nullable: true })
   address: string;

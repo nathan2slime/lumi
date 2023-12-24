@@ -15,40 +15,85 @@ export class UserService {
   ) {}
 
   async create(data: SignUpInput) {
-    logger.info('starting user creation', data.email);
+    try {
+      logger.info('starting user creation', data.email.toLowerCase());
 
-    const exists = await this.userRepository.exist({
-      where: { email: data.email },
-    });
+      const exists = await this.userRepository.exist({
+        where: { email: data.email.toLowerCase() },
+      });
 
-    if (exists) {
-      logger.error('user alredy exist with email', { email: data.email });
-      throw new Error('User alredy exists');
+      if (exists) {
+        logger.error('user already exists with email', {
+          email: data.email.toLowerCase(),
+        });
+
+        throw new Error('User already exists');
+      }
+
+      data.password = await hash(data.password, 10);
+
+      const user = await this.userRepository.save(data);
+      logger.debug('user created', { id: user.id });
+
+      return user.id;
+    } catch (error) {
+      logger.error('error during user creation', { error });
+      throw error;
     }
-
-    data.password = await hash(data.password, 10);
-
-    const user = await this.userRepository.save(data);
-    logger.debug('user created', { id: user.id });
-
-    return user.id;
   }
 
   async getById(id: string) {
-    const user = await this.userRepository.findOne({
-      where: { id },
-      relations: { tokens: true, roles: true, clients: true },
-    });
+    try {
+      const user = await this.userRepository.findOne({
+        where: { id },
+        relations: {
+          tokens: true,
+          roles: {
+            permissions: true,
+          },
+          clients: true,
+        },
+      });
 
-    return user;
+      if (!user) {
+        logger.warn('user not found by id', { id });
+      } else {
+        logger.info('retrieved user by id', { id });
+      }
+
+      return user;
+    } catch (error) {
+      logger.error('error during user retrieval by id', {
+        error,
+      });
+
+      throw error;
+    }
   }
 
   async getByEmail(email: string) {
-    const user = await this.userRepository.findOne({
-      where: { email },
-      relations: { tokens: true, roles: true, clients: true },
-    });
+    try {
+      const user = await this.userRepository.findOne({
+        where: { email: email.toLowerCase() },
+        relations: {
+          tokens: true,
+          roles: {
+            permissions: true,
+          },
+          clients: true,
+        },
+      });
 
-    return user;
+      if (!user) {
+        logger.warn('user not found by email', { email: email.toLowerCase() });
+      } else {
+        logger.info('retrieved user by email', { email: email.toLowerCase() });
+      }
+
+      return user;
+    } catch (error) {
+      logger.error('error during user retrieval by email', { error });
+      throw error;
+    }
   }
 }

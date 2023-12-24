@@ -3,12 +3,54 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
-type Client {
-  address: String
+type Bill {
+  client: Client!
+  created_at: DateTime!
+  deleted_at: DateTime
+  due_date: DateTime!
+  file: String!
+  id: String!
+  items: [BillItem!]!
+  moth: Float!
+  total_price: Float!
+  updated_at: DateTime
+}
+
+input BillInput {
+  client: Float!
+  due_date: DateTime!
+  file: String!
+  items: [BillItemInput!]! = []
+  moth: Float!
+  total_price: Float!
+}
+
+type BillItem {
+  amount: Float!
+  bill: Bill!
   created_at: DateTime!
   deleted_at: DateTime
   id: String!
-  installation: Float!
+  price: Float!
+  type: String!
+  unit_price: Float!
+  updated_at: DateTime
+}
+
+input BillItemInput {
+  amount: Float!
+  price: Float!
+  type: String!
+  unit_price: Float!
+}
+
+type Client {
+  address: String
+  bills: [Bill!]!
+  created_at: DateTime!
+  deleted_at: DateTime
+  id: String!
+  installation: Float
   number: Float!
   updated_at: DateTime
   user: User!
@@ -20,6 +62,7 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 scalar DateTime
 
 type Mutation {
+  CreateBill(data: BillInput!): Bill!
   SignIn(data: SignInInput!): User!
   SignUp(data: SignUpInput!): User!
 }
@@ -77,6 +120,6 @@ type User {
   name: String!
   roles: [Role!]
   surname: String!
-  tokens: [Token!]!
+  tokens: [Token!]
   updated_at: DateTime
 }

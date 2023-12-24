@@ -10,6 +10,7 @@ out/
 dist/
 .yarn/cache/
 build/
+.idea
 
 .DS_Store
 *.pem

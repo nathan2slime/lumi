@@ -20,7 +20,7 @@ export class User extends BaseModel {
   @Field(() => [Role], { defaultValue: [], nullable: true })
   roles: Role[];
 
-  @Field(() => [Token], { defaultValue: [] })
+  @Field(() => [Token], { defaultValue: [], nullable: true })
   tokens: Token[];
 
   @Field(() => [Client], { defaultValue: [], nullable: true })

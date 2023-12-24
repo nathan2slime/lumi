@@ -1,26 +1,30 @@
+version: "3"
+
 services:
-  app:
-    image: lumi
-    container_name: lumi
+  api:
     build:
       context: .
-      dockerfile: Dockerfile
-    command: yarn start
+      dockerfile: ./apps/api/Dockerfile
+    restart: always
+    ports:
+      - 9292:9292
     env_file:
       - ./.env.prod
-    expose:
-      - 7878:7878
-      - 9797:8585
+    depends_on:
+      - postgres
+  service:
+    build:
+      context: .
+      dockerfile: ./apps/service/Dockerfile
+    restart: always
     ports:
-      - 7878:7878
-      - 9797:8585
-    networks:
-      - lumi
-    volumes:
-      - .:/app/
-      - /app/node_modules/
+      - 9393:9393
+    env_file:
+      - ./.env.prod
+  postgres:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    env_file:
+      - ./.env.prod
 
-networks:
-  lumi:
-    name: dbmysql
-    external: true
