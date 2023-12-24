@@ -18,6 +18,7 @@ export const env = createEnv({
     APP_API_URL: z.string().url().min(1),
     APP_SERVICE_URL: z.string().url().min(1),
     APP_SERVICE_PORT: z.string().min(1),
+    APP_WEB_URL: z.string().min(1),
     STORAGE_KEY: z.string().default('@lumi/storage'),
     NODE_ENV: z.string().default('development'),
     FIREBASE_STORAGE_BUCKET: z.string().min(1),

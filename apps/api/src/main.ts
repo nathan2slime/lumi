@@ -16,7 +16,7 @@ const bootstrap = async () => {
 
   app.setGlobalPrefix(globalPrefix);
   app.enableCors({
-    origin: true,
+    origin: env.NODE_ENV == 'production' ? env.APP_WEB_URL : true,
   });
 
   await app.listen(port);

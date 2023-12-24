@@ -1,5 +1,5 @@
 import { BillEntity, BillItemEntity } from '@lumi/database';
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable, forwardRef } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { logger } from '@lumi/log';

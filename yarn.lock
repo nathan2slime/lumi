@@ -3303,6 +3303,7 @@ __metadata:
     "@types/supertest": "npm:^2.0.12"
     axios: "npm:^1.6.2"
     bcryptjs: "npm:^2.4.3"
+    class-transformer-validator: "npm:^0.9.1"
     class-validator: "npm:^0.14.0"
     graphql: "npm:^16.8.1"
     graphql-scalars: "npm:^1.22.4"
@@ -6673,6 +6674,16 @@ __metadata:
   version: 1.2.3
   resolution: "cjs-module-lexer@npm:1.2.3"
   checksum: f96a5118b0a012627a2b1c13bd2fcb92509778422aaa825c5da72300d6dcadfb47134dd2e9d97dfa31acd674891dd91642742772d19a09a8adc3e56bd2f5928c
+  languageName: node
+  linkType: hard
+
+"class-transformer-validator@npm:^0.9.1":
+  version: 0.9.1
+  resolution: "class-transformer-validator@npm:0.9.1"
+  peerDependencies:
+    class-transformer: ">=0.2.3"
+    class-validator: ">=0.12.0"
+  checksum: faa159fb4842ba0844b6b6f6b008d1a48a8b77f8e4ef2069cbf468e89093a83f01495825232c9e25ca71ada71ced1b12686bffdcf966aa39375f09445c325bfd
   languageName: node
   linkType: hard
 
