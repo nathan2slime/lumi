@@ -30,6 +30,7 @@ export class UserService {
         throw new Error('User already exists');
       }
 
+      data.email = data.email.toLowerCase();
       data.password = await hash(data.password, 10);
 
       const user = await this.userRepository.save(data);

@@ -82,6 +82,9 @@ export class SeedService {
 
       user.roles = [role];
       await this.userRepository.save(user);
+
+      delete payload.password;
+
       logger.info('success', 'user created', payload);
     } catch (error) {
       logger.error(error);
