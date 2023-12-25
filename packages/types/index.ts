@@ -21,13 +21,57 @@ export type Scalars = {
   DateTime: any;
 };
 
-export type Client = {
-  __typename?: 'Client';
-  address?: Maybe<Scalars['String']>;
+export type Bill = {
+  __typename?: 'Bill';
+  client: Client;
+  created_at: Scalars['DateTime'];
+  deleted_at?: Maybe<Scalars['DateTime']>;
+  due_date: Scalars['DateTime'];
+  file: Scalars['String'];
+  id: Scalars['String'];
+  items: Array<BillItem>;
+  moth: Scalars['Float'];
+  total_price: Scalars['Float'];
+  updated_at?: Maybe<Scalars['DateTime']>;
+};
+
+export type BillInput = {
+  client: Scalars['Float'];
+  due_date: Scalars['DateTime'];
+  file: Scalars['String'];
+  items?: Array<BillItemInput>;
+  moth: Scalars['Float'];
+  total_price: Scalars['Float'];
+};
+
+export type BillItem = {
+  __typename?: 'BillItem';
+  amount: Scalars['Float'];
+  bill: Bill;
   created_at: Scalars['DateTime'];
   deleted_at?: Maybe<Scalars['DateTime']>;
   id: Scalars['String'];
-  installation: Scalars['Float'];
+  price: Scalars['Float'];
+  type: Scalars['String'];
+  unit_price: Scalars['Float'];
+  updated_at?: Maybe<Scalars['DateTime']>;
+};
+
+export type BillItemInput = {
+  amount: Scalars['Float'];
+  price: Scalars['Float'];
+  type: Scalars['String'];
+  unit_price: Scalars['Float'];
+};
+
+export type Client = {
+  __typename?: 'Client';
+  address?: Maybe<Scalars['String']>;
+  bills: Array<Bill>;
+  created_at: Scalars['DateTime'];
+  deleted_at?: Maybe<Scalars['DateTime']>;
+  id: Scalars['String'];
+  installation?: Maybe<Scalars['Float']>;
   number: Scalars['Float'];
   updated_at?: Maybe<Scalars['DateTime']>;
   user: User;
@@ -35,7 +79,17 @@ export type Client = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  CreateBill: Bill;
+  SignIn: User;
   SignUp: User;
+};
+
+export type MutationCreateBillArgs = {
+  data: BillInput;
+};
+
+export type MutationSignInArgs = {
+  data: SignInInput;
 };
 
 export type MutationSignUpArgs = {
@@ -62,9 +116,14 @@ export type Role = {
   deleted_at?: Maybe<Scalars['DateTime']>;
   id: Scalars['String'];
   name: Scalars['String'];
-  permissions: Permission;
+  permissions: Array<Permission>;
   updated_at?: Maybe<Scalars['DateTime']>;
   user: User;
+};
+
+export type SignInInput = {
+  email: Scalars['String'];
+  password: Scalars['String'];
 };
 
 export type SignUpInput = {
@@ -87,12 +146,16 @@ export type Token = {
 
 export type User = {
   __typename?: 'User';
-  clients?: Maybe<Client>;
+  clients?: Maybe<Array<Client>>;
+  created_at: Scalars['DateTime'];
+  deleted_at?: Maybe<Scalars['DateTime']>;
   email: Scalars['String'];
+  id: Scalars['String'];
   name: Scalars['String'];
-  roles?: Maybe<Role>;
+  roles?: Maybe<Array<Role>>;
   surname: Scalars['String'];
-  tokens: Token;
+  tokens?: Maybe<Array<Token>>;
+  updated_at?: Maybe<Scalars['DateTime']>;
 };
 
 export const SignUpDocument = {
@@ -209,6 +272,301 @@ export const SignUpDocument = {
     },
   ],
 } as unknown as DocumentNode<SignUpMutation, SignUpMutationVariables>;
+export const SignInDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'SignIn' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'data' } },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'SignInInput' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'SignIn' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'data' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'data' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'surname' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'email' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'roles' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'created_at' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'updated_at' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'deleted_at' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'permissions' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'name' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'tokens' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'created_at' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'updated_at' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'deleted_at' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'value' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<SignInMutation, SignInMutationVariables>;
+export const AuthDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'Auth' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'Auth' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'surname' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'email' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'roles' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'created_at' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'updated_at' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'deleted_at' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'permissions' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'name' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'tokens' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'created_at' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'updated_at' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'deleted_at' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'value' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<AuthQuery, AuthQueryVariables>;
+export const CreateBillDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'CreateBill' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'data' } },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'BillInput' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'CreateBill' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'data' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'data' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'total_price' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'due_date' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'moth' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'file' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'created_at' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'updated_at' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'deleted_at' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'client' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'number' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'items' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'amount' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'unit_price' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'price' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<CreateBillMutation, CreateBillMutationVariables>;
 export type SignUpMutationVariables = Exact<{
   data: SignUpInput;
 }>;
@@ -220,7 +578,7 @@ export type SignUpMutation = {
     email: string;
     name: string;
     surname: string;
-    tokens: {
+    tokens?: Array<{
       __typename?: 'Token';
       id: string;
       value: string;
@@ -228,15 +586,118 @@ export type SignUpMutation = {
       created_at: any;
       updated_at?: any | null;
       deleted_at?: any | null;
-    };
-    roles?: {
+    }> | null;
+    roles?: Array<{
       __typename?: 'Role';
       id: string;
       name: string;
       created_at: any;
       deleted_at?: any | null;
       updated_at?: any | null;
-      permissions: { __typename?: 'Permission'; name: string; id: string };
-    } | null;
+      permissions: Array<{
+        __typename?: 'Permission';
+        name: string;
+        id: string;
+      }>;
+    }> | null;
+  };
+};
+
+export type SignInMutationVariables = Exact<{
+  data: SignInInput;
+}>;
+
+export type SignInMutation = {
+  __typename?: 'Mutation';
+  SignIn: {
+    __typename?: 'User';
+    id: string;
+    name: string;
+    surname: string;
+    email: string;
+    roles?: Array<{
+      __typename?: 'Role';
+      id: string;
+      created_at: any;
+      updated_at?: any | null;
+      deleted_at?: any | null;
+      name: string;
+      permissions: Array<{
+        __typename?: 'Permission';
+        name: string;
+        id: string;
+      }>;
+    }> | null;
+    tokens?: Array<{
+      __typename?: 'Token';
+      id: string;
+      created_at: any;
+      updated_at?: any | null;
+      deleted_at?: any | null;
+      type: string;
+      value: string;
+    }> | null;
+  };
+};
+
+export type AuthQueryVariables = Exact<{ [key: string]: never }>;
+
+export type AuthQuery = {
+  __typename?: 'Query';
+  Auth: {
+    __typename?: 'User';
+    id: string;
+    name: string;
+    surname: string;
+    email: string;
+    roles?: Array<{
+      __typename?: 'Role';
+      id: string;
+      created_at: any;
+      updated_at?: any | null;
+      deleted_at?: any | null;
+      name: string;
+      permissions: Array<{
+        __typename?: 'Permission';
+        name: string;
+        id: string;
+      }>;
+    }> | null;
+    tokens?: Array<{
+      __typename?: 'Token';
+      id: string;
+      created_at: any;
+      updated_at?: any | null;
+      deleted_at?: any | null;
+      type: string;
+      value: string;
+    }> | null;
+  };
+};
+
+export type CreateBillMutationVariables = Exact<{
+  data: BillInput;
+}>;
+
+export type CreateBillMutation = {
+  __typename?: 'Mutation';
+  CreateBill: {
+    __typename?: 'Bill';
+    id: string;
+    total_price: number;
+    due_date: any;
+    moth: number;
+    file: string;
+    created_at: any;
+    updated_at?: any | null;
+    deleted_at?: any | null;
+    client: { __typename?: 'Client'; number: number; id: string };
+    items: Array<{
+      __typename?: 'BillItem';
+      id: string;
+      amount: number;
+      unit_price: number;
+      price: number;
+    }>;
   };
 };

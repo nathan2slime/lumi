@@ -1,0 +1,22 @@
+mutation CreateBill($data: BillInput!) {
+  CreateBill(data: $data) {
+    id
+    total_price
+    due_date
+    moth
+    file
+    created_at
+    updated_at
+    deleted_at
+    client {
+      number
+      id
+    }
+    items {
+      id
+      amount
+      unit_price
+      price
+    }
+  }
+}
