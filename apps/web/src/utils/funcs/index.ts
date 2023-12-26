@@ -17,3 +17,7 @@ export const getAvatarFallback = (value: string): string => {
 
   return initials;
 };
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5b6d67a (feat(web): create invoice page)
