@@ -1,9 +1,15 @@
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -80,16 +86,13 @@ export type Mutation = {
   SignUp: User;
 };
 
-
 export type MutationCreateBillArgs = {
   data: BillInput;
 };
 
-
 export type MutationSignInArgs = {
   data: SignInInput;
 };
-
 
 export type MutationSignUpArgs = {
   data: SignUpInput;
@@ -572,20 +575,109 @@ export type SignUpMutationVariables = Exact<{
   data: SignUpInput;
 }>;
 
-
-export type SignUpMutation = { __typename?: 'Mutation', SignUp: { __typename?: 'User', email: string, name: string, surname: string, tokens?: Array<{ __typename?: 'Token', id: string, value: string, type: string, created_at: any, updated_at?: any | null, deleted_at?: any | null }> | null, roles?: Array<{ __typename?: 'Role', id: string, name: string, created_at: any, deleted_at?: any | null, updated_at?: any | null, permissions: Array<{ __typename?: 'Permission', name: string, id: string }> }> | null } };
+export type SignUpMutation = {
+  __typename?: 'Mutation';
+  SignUp: {
+    __typename?: 'User';
+    email: string;
+    name: string;
+    surname: string;
+    tokens?: Array<{
+      __typename?: 'Token';
+      id: string;
+      value: string;
+      type: string;
+      created_at: any;
+      updated_at?: any | null;
+      deleted_at?: any | null;
+    }> | null;
+    roles?: Array<{
+      __typename?: 'Role';
+      id: string;
+      name: string;
+      created_at: any;
+      deleted_at?: any | null;
+      updated_at?: any | null;
+      permissions: Array<{
+        __typename?: 'Permission';
+        name: string;
+        id: string;
+      }>;
+    }> | null;
+  };
+};
 
 export type SignInMutationVariables = Exact<{
   data: SignInInput;
 }>;
 
+export type SignInMutation = {
+  __typename?: 'Mutation';
+  SignIn: {
+    __typename?: 'User';
+    id: string;
+    name: string;
+    surname: string;
+    email: string;
+    roles?: Array<{
+      __typename?: 'Role';
+      id: string;
+      created_at: any;
+      updated_at?: any | null;
+      deleted_at?: any | null;
+      name: string;
+      permissions: Array<{
+        __typename?: 'Permission';
+        name: string;
+        id: string;
+      }>;
+    }> | null;
+    tokens?: Array<{
+      __typename?: 'Token';
+      id: string;
+      created_at: any;
+      updated_at?: any | null;
+      deleted_at?: any | null;
+      type: string;
+      value: string;
+    }> | null;
+  };
+};
 
-export type SignInMutation = { __typename?: 'Mutation', SignIn: { __typename?: 'User', id: string, name: string, surname: string, email: string, roles?: Array<{ __typename?: 'Role', id: string, created_at: any, updated_at?: any | null, deleted_at?: any | null, name: string, permissions: Array<{ __typename?: 'Permission', name: string, id: string }> }> | null, tokens?: Array<{ __typename?: 'Token', id: string, created_at: any, updated_at?: any | null, deleted_at?: any | null, type: string, value: string }> | null } };
+export type AuthQueryVariables = Exact<{ [key: string]: never }>;
 
-export type AuthQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type AuthQuery = { __typename?: 'Query', Auth: { __typename?: 'User', id: string, name: string, surname: string, email: string, roles?: Array<{ __typename?: 'Role', id: string, created_at: any, updated_at?: any | null, deleted_at?: any | null, name: string, permissions: Array<{ __typename?: 'Permission', name: string, id: string }> }> | null, tokens?: Array<{ __typename?: 'Token', id: string, created_at: any, updated_at?: any | null, deleted_at?: any | null, type: string, value: string }> | null } };
+export type AuthQuery = {
+  __typename?: 'Query';
+  Auth: {
+    __typename?: 'User';
+    id: string;
+    name: string;
+    surname: string;
+    email: string;
+    roles?: Array<{
+      __typename?: 'Role';
+      id: string;
+      created_at: any;
+      updated_at?: any | null;
+      deleted_at?: any | null;
+      name: string;
+      permissions: Array<{
+        __typename?: 'Permission';
+        name: string;
+        id: string;
+      }>;
+    }> | null;
+    tokens?: Array<{
+      __typename?: 'Token';
+      id: string;
+      created_at: any;
+      updated_at?: any | null;
+      deleted_at?: any | null;
+      type: string;
+      value: string;
+    }> | null;
+  };
+};
 
 export type CreateBillMutationVariables = Exact<{
   data: BillInput;

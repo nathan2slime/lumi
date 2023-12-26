@@ -43,11 +43,15 @@ const newBill = z.object({
     .number({ required_error, invalid_type_error })
     .min(0, invalid_type_error),
 <<<<<<< HEAD
+<<<<<<< HEAD
   client: z.string({ required_error, invalid_type_error }),
 =======
   client: z
     .string({ required_error, invalid_type_error }),
 >>>>>>> 5b6d67a (feat(web): create invoice page)
+=======
+  client: z.string({ required_error, invalid_type_error }),
+>>>>>>> 75ef71d (feat(web): format code)
   date: z.date({ required_error, invalid_type_error }),
   due_date: z.date({ required_error, invalid_type_error }),
 });
