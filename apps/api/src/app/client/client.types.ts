@@ -4,7 +4,7 @@ import { Field, InputType, ObjectType } from 'type-graphql';
 @InputType()
 export class ClientInput {
   @Field()
-  number: number;
+  number: string;
 }
 
 @ObjectType()

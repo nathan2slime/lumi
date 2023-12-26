@@ -1,15 +1,15 @@
-import { Field, InputType, ObjectType } from 'type-graphql';
+import { Field, Float, InputType, ObjectType } from 'type-graphql';
 
 import { BillItemInput } from '../bill_item/bill_item.types';
 
 @ObjectType()
 @InputType()
 export class BillInput {
-  @Field()
+  @Field(() => Float)
   total_price: number;
 
   @Field()
-  client: number;
+  client: string;
 
   @Field(() => [BillItemInput], { defaultValue: [] })
   items: BillItemInput[];
@@ -17,8 +17,11 @@ export class BillInput {
   @Field()
   due_date: Date;
 
+  @Field({ nullable: true })
+  public_lighting_contribution: number;
+
   @Field()
-  moth: number;
+  date: Date;
 
   @Field()
   file: string;

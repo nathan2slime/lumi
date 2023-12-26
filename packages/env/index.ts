@@ -3,7 +3,7 @@ import { z } from 'zod';
 
 export const env = createEnv({
   server: {
-    POSTGRES_POST: z.string().default('5232'),
+    POSTGRES_PORT: z.string().default('5232'),
     POSTGRES_USER: z.string().min(1),
     POSTGRES_HOST: z.string().min(1),
     POSTGRES_PASSWORD: z.string().min(1),
@@ -19,9 +19,13 @@ export const env = createEnv({
     APP_WEB_URL: z.string().min(1),
     STORAGE_KEY: z.string().default('@lumi/storage'),
     NODE_ENV: z.string().default('development'),
-    FIREBASE_STORAGE_BUCKET: z.string().min(1),
+    NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: z.string().min(1),
     NEXT_PUBLIC_APP_API_URL: z.string().url().min(1),
     NEXT_PUBLIC_APP_SERVICE_URL: z.string().url().min(1),
+    NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: z.string().min(1),
+    NEXT_PUBLIC_FIREBASE_PROJECT_ID: z.string().min(1),
+    NEXT_PUBLIC_FIREBASE_API_KEY: z.string().min(1),
+    NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: z.string().min(1),
   },
   isServer: true,
   runtimeEnv: process.env,

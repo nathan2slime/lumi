@@ -89,6 +89,7 @@ describe('BillService', () => {
   describe('create', () => {
     const payload: BillInput = {
       total_price: faker.number.int(),
+      public_lighting_contribution: faker.number.int(),
       items: [
         {
           amount: faker.number.int(),
@@ -97,8 +98,8 @@ describe('BillService', () => {
           unit_price: faker.number.int(),
         } as BillItemInput,
       ],
-      client: faker.number.int(),
-      moth: faker.number.int(),
+      client: faker.string.alphanumeric(),
+      date: faker.date.anytime(),
       due_date: faker.date.anytime(),
       file: faker.string.sample(),
     };
@@ -126,7 +127,7 @@ describe('BillService', () => {
         client,
         total_price: payload.total_price,
         due_date: payload.due_date,
-        moth: payload.moth,
+        date: payload.date,
         file: payload.file,
       });
       expect(res).toMatchObject(bill);

@@ -2,8 +2,9 @@ const path = require('path');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   transpilePackages: ['@lumi/types', '@lumi/env'],
+  publicRuntimeConfig: {},
   webpack: config => {
     config.module.rules.push({
       test: /\.svg$/i,

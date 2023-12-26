@@ -22,7 +22,6 @@ RUN yarn install
 COPY --from=builder /app/out/full/ .
 COPY turbo.json turbo.json
 
-COPY .env .env
 RUN yarn turbo build --filter=@lumi/service...
 
 FROM base AS runner

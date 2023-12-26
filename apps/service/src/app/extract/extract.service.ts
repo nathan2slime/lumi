@@ -24,7 +24,6 @@ export class ExtractService {
 
         pdfParser.on('pdfParser_dataReady', async data => {
           const texts = data.Pages[0].Texts;
-
           res(this.parser(texts));
         });
       }))();

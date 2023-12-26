@@ -4,6 +4,8 @@ import { AppChildren } from '@/types';
 
 import { styles } from './styles';
 
+import '@/firebase';
+
 const AuthLayout = ({ children }: AppChildren) => {
   const style = styles();
 

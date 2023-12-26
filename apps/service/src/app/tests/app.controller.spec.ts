@@ -28,6 +28,7 @@ describe('AppController', () => {
     data: {
       total_price: null,
       client: null,
+      public_lighting_contribution: null,
       due_date: null,
     },
   };

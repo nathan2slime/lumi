@@ -10,7 +10,7 @@ import { BillEntity } from './bill.model';
 })
 export class ClientEntity extends BaseModelEntity {
   @Column({ unique: true })
-  number: number;
+  number: string;
 
   @Column({ nullable: true })
   installation: number;

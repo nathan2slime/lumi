@@ -9,7 +9,7 @@ import { BillItemEntity } from './bill_item.model';
   synchronize: true,
 })
 export class BillEntity extends BaseModelEntity {
-  @Column()
+  @Column('float')
   total_price: number;
 
   @ManyToOne(() => ClientEntity, client => client.bills)
@@ -22,7 +22,10 @@ export class BillEntity extends BaseModelEntity {
   due_date: Date;
 
   @Column()
-  moth: number;
+  date: Date;
+
+  @Column('float', { nullable: true })
+  public_lighting_contribution: number;
 
   @Column()
   file: string;
