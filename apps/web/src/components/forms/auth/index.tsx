@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { useCallback, useState } from 'react';
 import { BeatLoader } from 'react-spinners';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
@@ -31,7 +32,7 @@ import { styles } from './styles';
 
 export const AuthForm = ({ type }: AuthFormProps) => {
   const auth = useAuthState();
-
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const style = styles();
@@ -71,6 +72,7 @@ export const AuthForm = ({ type }: AuthFormProps) => {
     if (res) {
       auth.setUser(res as User);
       auth.setLogged(true);
+      router.push('/');
     }
 
     setLoading(false);

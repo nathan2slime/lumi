@@ -3,7 +3,7 @@ mutation CreateBill($data: BillInput!) {
     id
     total_price
     due_date
-    moth
+    date
     file
     created_at
     updated_at
@@ -16,6 +16,7 @@ mutation CreateBill($data: BillInput!) {
       id
       amount
       unit_price
+      type
       price
     }
   }

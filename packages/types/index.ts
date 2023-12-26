@@ -25,22 +25,24 @@ export type Bill = {
   __typename?: 'Bill';
   client: Client;
   created_at: Scalars['DateTime'];
+  date: Scalars['DateTime'];
   deleted_at?: Maybe<Scalars['DateTime']>;
   due_date: Scalars['DateTime'];
   file: Scalars['String'];
   id: Scalars['String'];
   items: Array<BillItem>;
-  moth: Scalars['Float'];
+  public_lighting_contribution: Scalars['Float'];
   total_price: Scalars['Float'];
   updated_at?: Maybe<Scalars['DateTime']>;
 };
 
 export type BillInput = {
-  client: Scalars['Float'];
+  client: Scalars['String'];
+  date: Scalars['DateTime'];
   due_date: Scalars['DateTime'];
   file: Scalars['String'];
   items?: Array<BillItemInput>;
-  moth: Scalars['Float'];
+  public_lighting_contribution?: InputMaybe<Scalars['Float']>;
   total_price: Scalars['Float'];
 };
 
@@ -72,7 +74,7 @@ export type Client = {
   deleted_at?: Maybe<Scalars['DateTime']>;
   id: Scalars['String'];
   installation?: Maybe<Scalars['Float']>;
-  number: Scalars['Float'];
+  number: Scalars['String'];
   updated_at?: Maybe<Scalars['DateTime']>;
   user: User;
 };
@@ -108,6 +110,7 @@ export type Permission = {
 export type Query = {
   __typename?: 'Query';
   Auth: User;
+  Bills: Array<Bill>;
 };
 
 export type Role = {
@@ -521,7 +524,7 @@ export const CreateBillDocument = {
                 { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'total_price' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'due_date' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'moth' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'date' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'file' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'created_at' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'updated_at' } },
@@ -555,6 +558,7 @@ export const CreateBillDocument = {
                         kind: 'Field',
                         name: { kind: 'Name', value: 'unit_price' },
                       },
+                      { kind: 'Field', name: { kind: 'Name', value: 'type' } },
                       { kind: 'Field', name: { kind: 'Name', value: 'price' } },
                     ],
                   },
@@ -686,17 +690,18 @@ export type CreateBillMutation = {
     id: string;
     total_price: number;
     due_date: any;
-    moth: number;
+    date: any;
     file: string;
     created_at: any;
     updated_at?: any | null;
     deleted_at?: any | null;
-    client: { __typename?: 'Client'; number: number; id: string };
+    client: { __typename?: 'Client'; number: string; id: string };
     items: Array<{
       __typename?: 'BillItem';
       id: string;
       amount: number;
       unit_price: number;
+      type: string;
       price: number;
     }>;
   };

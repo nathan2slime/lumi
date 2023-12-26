@@ -14,7 +14,7 @@ describe('bill types', () => {
       total_price: faker.number.int(),
       items: [],
       client: faker.number.int(),
-      moth: faker.number.int(),
+      date: faker.date.anytime(),
       due_date: faker.date.anytime(),
       file: faker.string.sample(),
     };

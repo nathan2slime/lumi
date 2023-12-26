@@ -48,6 +48,7 @@ export const fields: DataField[] = [
         index: 125,
         regex: /(\d+)/,
       },
+      public_lighting_contribution: { index: 33, regex: /(\d+)/ },
       due_date: {
         regex: /\b(\d{1,2}\/\d{1,2}\/\d{4})\b/,
         index: 128,

@@ -20,7 +20,7 @@ describe('AppController (e2e)', () => {
     it('must return the information extracted from the PDF', async () => {
       const response = await request(app.getHttpServer())
         .post('/parser')
-        .send({ filename: '321321903821.pdf' });
+        .send({ file_name: '0.42450884106862086' });
 
       expect(response.body).toHaveProperty('energy_without_icms_value');
       expect(response.body).toHaveProperty('compensed_energy');

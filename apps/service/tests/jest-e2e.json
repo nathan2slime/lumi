@@ -8,6 +8,6 @@
   },
   "verbose": true,
   "setupFilesAfterEnv": [
-    "<rootDir>/tests/jest.setup.ts"
+    "<rootDir>/jest.setup.ts"
   ]
 }

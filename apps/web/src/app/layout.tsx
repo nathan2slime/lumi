@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
-import { Dosis, Titillium_Web } from 'next/font/google';
+import { Titillium_Web } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
+
+import { AuthProvider } from '@/providers/auth';
+import { RootLayout } from '@/components/layouts/root';
 
 import { ApolloWrapper } from './lib/apollo-provider';
 
@@ -11,7 +14,7 @@ import { AppChildren } from '../types';
 
 import '@/global/styles.scss';
 
-const baloo = Titillium_Web({
+const appFonts = Titillium_Web({
   subsets: ['latin'],
   weight: ['200', '300', '400', '600', '700', '900'],
 });
@@ -24,8 +27,12 @@ export const metadata: Metadata = {
 const AppLayout = ({ children }: AppChildren) => {
   return (
     <html lang="en">
-      <body className={cn(baloo.className, 'dark')}>
-        <ApolloWrapper>{children}</ApolloWrapper>
+      <body className={cn(appFonts.className)}>
+        <ApolloWrapper>
+          <AuthProvider>
+            <RootLayout>{children}</RootLayout>
+          </AuthProvider>
+        </ApolloWrapper>
         <Toaster toastOptions={toastOptions} />
       </body>
     </html>

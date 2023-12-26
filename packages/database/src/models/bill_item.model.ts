@@ -9,13 +9,13 @@ import { BillEntity } from './bill.model';
   synchronize: true,
 })
 export class BillItemEntity extends BaseModelEntity {
-  @Column()
+  @Column('float')
   amount: number;
 
-  @Column()
+  @Column('float')
   unit_price: number;
 
-  @Column()
+  @Column('float')
   price: number;
 
   @Column('enum', {

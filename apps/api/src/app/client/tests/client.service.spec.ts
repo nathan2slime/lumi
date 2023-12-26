@@ -101,7 +101,7 @@ describe('ClientService', () => {
     const payload = {
       address: faker.location.streetAddress(),
       installation: faker.number.int(),
-      number: faker.number.int(),
+      number: faker.string.alphanumeric(),
     };
 
     it('must update and return updated client', async () => {
@@ -136,7 +136,7 @@ describe('ClientService', () => {
     const payload = {
       address: faker.location.streetAddress(),
       installation: faker.number.int(),
-      number: faker.number.int(),
+      number: faker.string.alphanumeric(),
     };
     const id = Math.random().toString();
 

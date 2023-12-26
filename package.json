@@ -2,7 +2,7 @@
   "name": "lumi",
   "private": true,
   "scripts": {
-    "build": "turbo run build",
+    "build": "dotenv -- turbo run build",
     "test": "dotenv -- turbo run test",
     "seed": "dotenv -- turbo run seed",
     "clean": "rm -rf node_modules",
@@ -10,8 +10,8 @@
     "dev": "dotenv -- turbo run dev",
     "prod": "dotenv -- turbo run prod",
     "gen": "graphql-codegen",
-    "test:e2e": "dotenv -- turbo run test:e2e",
-    "test:cov": "dotenv -- turbo run test:cov",
+    "test:e2e": "dotenv -e .env.test -- turbo run test:e2e",
+    "test:cov": "dotenv -e .env.test -- turbo run test:cov",
     "commit": "git-cz",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },

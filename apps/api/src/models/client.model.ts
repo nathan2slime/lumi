@@ -8,7 +8,7 @@ import { Bill } from './bill.model';
 @InputType()
 export class Client extends BaseModel {
   @Field()
-  number: number;
+  number: string;
 
   @Field({ nullable: true })
   installation: number;

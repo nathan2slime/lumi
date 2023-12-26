@@ -1,4 +1,4 @@
-import { Field, InputType, ObjectType } from 'type-graphql';
+import { Field, Float, InputType, ObjectType } from 'type-graphql';
 
 import { BaseModel } from './base.model';
 import { Client } from './client.model';
@@ -7,7 +7,7 @@ import { BillItem } from './bill_item.model';
 @ObjectType()
 @InputType()
 export class Bill extends BaseModel {
-  @Field()
+  @Field(() => Float)
   total_price: number;
 
   @Field(() => Client)
@@ -16,11 +16,14 @@ export class Bill extends BaseModel {
   @Field(() => [BillItem], { defaultValue: [] })
   items: BillItem[];
 
+  @Field(() => Float)
+  public_lighting_contribution: number;
+
   @Field()
   due_date: Date;
 
   @Field()
-  moth: number;
+  date: Date;
 
   @Field()
   file: string;

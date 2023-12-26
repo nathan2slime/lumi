@@ -39,7 +39,7 @@ export class BillService {
         client,
         total_price: payload.total_price,
         due_date: payload.due_date,
-        moth: payload.moth,
+        date: payload.date,
         file: payload.file,
       });
 

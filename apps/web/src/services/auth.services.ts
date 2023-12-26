@@ -1,4 +1,7 @@
 import {
+  AuthDocument,
+  AuthQuery,
+  AuthQueryVariables,
   SignInDocument,
   SignInInput,
   SignInMutation,
@@ -34,4 +37,12 @@ export const signUpService = async ({
     variables: {
       data,
     },
+  });
+
+export const authService = async (args: AppService<{}>) =>
+  await graphql<AuthQuery, AuthQueryVariables>({
+    ...args,
+    query: AuthDocument,
+    type: 'query',
+    variables: {},
   });

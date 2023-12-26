@@ -22,7 +22,8 @@ RUN yarn install
 COPY --from=builder /app/out/full/ .
 COPY turbo.json turbo.json
 
-COPY .env .env
+ENV NODE_ENV production
+ENV NEXT_TELEMETRY_DISABLED 1
 RUN yarn turbo build --filter=@lumi/api...
 
 FROM base AS runner

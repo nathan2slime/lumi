@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Arg, Authorized, Ctx, Mutation, Resolver } from 'type-graphql';
+import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql';
 import { PermissionEnum } from '@lumi/database';
 
 import { BillService } from './bill.service';
@@ -18,4 +18,7 @@ export class BillResolver {
   async create(@Ctx() ctx: ContextDataType, @Arg('data') data: BillInput) {
     return await this.billService.create(data, ctx.token);
   }
+
+  @Query(() => [Bill], { name: 'Bills' })
+  async find() {}
 }

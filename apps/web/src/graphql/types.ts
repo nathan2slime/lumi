@@ -13,4 +13,5 @@ export type AppRequest<T> = {
 export type AppService<T> = {
   data: T;
   client?: ApolloClient<any>;
+  token?: string;
 };

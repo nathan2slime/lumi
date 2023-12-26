@@ -6,22 +6,24 @@
 type Bill {
   client: Client!
   created_at: DateTime!
+  date: DateTime!
   deleted_at: DateTime
   due_date: DateTime!
   file: String!
   id: String!
   items: [BillItem!]!
-  moth: Float!
+  public_lighting_contribution: Float!
   total_price: Float!
   updated_at: DateTime
 }
 
 input BillInput {
-  client: Float!
+  client: String!
+  date: DateTime!
   due_date: DateTime!
   file: String!
   items: [BillItemInput!]! = []
-  moth: Float!
+  public_lighting_contribution: Float
   total_price: Float!
 }
 
@@ -51,7 +53,7 @@ type Client {
   deleted_at: DateTime
   id: String!
   installation: Float
-  number: Float!
+  number: String!
   updated_at: DateTime
   user: User!
 }
@@ -77,6 +79,7 @@ type Permission {
 
 type Query {
   Auth: User!
+  Bills: [Bill!]!
 }
 
 type Role {

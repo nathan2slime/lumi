@@ -9,5 +9,5 @@ const config = {
 
 export const firebase = admin.initializeApp({
   credential: admin.credential.cert(require(config[env.NODE_ENV])),
-  storageBucket: env.FIREBASE_STORAGE_BUCKET,
+  storageBucket: env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
 });
