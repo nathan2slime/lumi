@@ -19,8 +19,6 @@ export class BillResolver {
     return await this.billService.create(data, ctx.token);
   }
 
-  @Query(() => [Bill], { name: 'Bills'})
-  async find() {
-    
-  }
+  @Query(() => [Bill], { name: 'Bills' })
+  async find() {}
 }

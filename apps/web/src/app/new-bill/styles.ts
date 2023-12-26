@@ -11,6 +11,6 @@ export const styles = tv({
     header: 'flex justify-start pb-3 items-center gap-3',
     submit: 'font-bold max-w-[180px] w-full mt-5',
     footer: 'flex justify-end items-center gap-3',
-    subform: 'flex flex-col gap-2 mt-5 w-full'
+    subform: 'flex flex-col gap-2 mt-5 w-full',
   },
 });

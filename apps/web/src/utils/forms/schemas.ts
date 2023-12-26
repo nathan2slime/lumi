@@ -42,8 +42,7 @@ const newBill = z.object({
   total_price: z.coerce
     .number({ required_error, invalid_type_error })
     .min(0, invalid_type_error),
-  client: z
-    .string({ required_error, invalid_type_error }),
+  client: z.string({ required_error, invalid_type_error }),
   date: z.date({ required_error, invalid_type_error }),
   due_date: z.date({ required_error, invalid_type_error }),
 });

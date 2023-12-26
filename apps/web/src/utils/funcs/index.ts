@@ -17,4 +17,3 @@ export const getAvatarFallback = (value: string): string => {
 
   return initials;
 };
-

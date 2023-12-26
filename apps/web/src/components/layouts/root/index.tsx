@@ -24,9 +24,9 @@ export const RootLayout = ({ children }: AppChildren) => {
     <div className={style.wrapper()}>
       <Sidebar />
 
-        <ScrollArea className={cn(style.page(), 'app-scroll-area')}>
-          {children}
-        </ScrollArea>
+      <ScrollArea className={cn(style.page(), 'app-scroll-area')}>
+        {children}
+      </ScrollArea>
     </div>
   );
 };

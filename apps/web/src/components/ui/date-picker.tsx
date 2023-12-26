@@ -12,26 +12,22 @@ import { cn } from '@/lib/utils';
 
 export type DatePickerProps = {
   value: Date;
-  onChange: (value?: Date) => void
+  onChange: (value?: Date) => void;
 };
 
-export const DatePicker = ({ value, onChange}: DatePickerProps) => {
+export const DatePicker = ({ value, onChange }: DatePickerProps) => {
   return (
     <Popover>
       <PopoverTrigger asChild>
         <FormControl>
           <Button
-            variant='outline'
+            variant="outline"
             className={cn(
               'w-full pl-3 text-left font-normal',
               !value && 'text-muted-foreground',
             )}
           >
-            {value ? (
-              format(value, 'PPP')
-            ) : (
-              <span>Pick a date</span>
-            )}
+            {value ? format(value, 'PPP') : <span>Pick a date</span>}
             <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
           </Button>
         </FormControl>

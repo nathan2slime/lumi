@@ -29,7 +29,7 @@ export const BillItemForm = ({ form, label, name }: BillItemFormProps) => {
             <FormItem>
               <FormLabel>Unit price</FormLabel>
               <FormControl>
-                <Input  type="number" {...field} />
+                <Input type="number" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -43,7 +43,7 @@ export const BillItemForm = ({ form, label, name }: BillItemFormProps) => {
             <FormItem>
               <FormLabel>Price</FormLabel>
               <FormControl>
-                <Input  type="number" {...field} />
+                <Input type="number" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
