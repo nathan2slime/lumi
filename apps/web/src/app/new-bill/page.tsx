@@ -146,7 +146,7 @@ const NewBill = ({}: UploadBillProps) => {
           data: payload,
           token: token.value,
         });
-        
+
         toast.dismiss(loading);
 
         if (res) {

@@ -21,7 +21,9 @@ const Bills = async () => {
   const clients = (clientsResponse &&
     clientsResponse.Clients.items) as unknown as Client[];
 
-  const currentClient = (clients.length > 0 && clients[0].number) as string;
+  const currentClient = (clients &&
+    clients.length > 0 &&
+    clients[0].number) as string;
 
   const billsResponse =
     currentClient &&
@@ -38,7 +40,11 @@ const Bills = async () => {
 
   return (
     <div className={style.wrapper()}>
-      <TableBill initialClient={currentClient} clients={clients} data={bills.items} />
+      <TableBill
+        initialClient={currentClient}
+        clients={clients}
+        data={bills.items}
+      />
     </div>
   );
 };

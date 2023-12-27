@@ -29,8 +29,9 @@ export const columns: ColumnDef<Bill>[] = [
       );
     },
     cell: ({ row }) => (
-        <div className="lowercase pl-4">
-        {format(row.getValue('date'), 'MM/yy')}</div>
+      <div className="lowercase pl-4">
+        {format(row.getValue('date'), 'MM/yy')}
+      </div>
     ),
   },
   {

@@ -22,7 +22,9 @@ const Index = async () => {
   const clients = (clientsResponse &&
     clientsResponse.Clients.items) as unknown as Client[];
 
-  const currentClient = (clients.length > 0 && clients[0].number) as string;
+  const currentClient = (clients &&
+    clients.length > 0 &&
+    clients[0].number) as string;
 
   const billsResponse =
     currentClient &&

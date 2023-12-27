@@ -93,7 +93,7 @@ export class AuthService {
 
         const isValid = !!user.tokens.find(e => e.value == token);
         if (!isValid) throw err;
-        
+
         logger.info('user authorized', { user: user.id });
 
         return user;

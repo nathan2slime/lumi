@@ -38,4 +38,3 @@ export class SearchClientInput extends PaginateInput {
   @Field(() => String)
   number: string;
 }
-

@@ -6,11 +6,11 @@ export const items = [
     path: '/',
     title: 'Dashboard',
     icon: <DashboardIcon />,
-    permissions: [PermissionEnum.ADMINISTRATOR]
+    permissions: [PermissionEnum.ADMINISTRATOR],
   },
   {
     path: '/bills',
     title: 'Bills',
-    icon: <FileIcon />
+    icon: <FileIcon />,
   },
 ];

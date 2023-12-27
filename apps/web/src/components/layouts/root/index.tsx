@@ -24,9 +24,7 @@ export const RootLayout = ({ children }: AppChildren) => {
     <div className={style.wrapper()}>
       <Sidebar />
 
-      <div className={cn(style.page())}>
-        {children}
-      </div>
+      <div className={cn(style.page())}>{children}</div>
     </div>
   );
 };

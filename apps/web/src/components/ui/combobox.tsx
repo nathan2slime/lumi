@@ -44,15 +44,24 @@ export function ComboboxPopover({
       <p className="text-sm flex-shrink-0 text-muted-foreground">{label}</p>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <Button variant="outline" className="max-w-[150px] w-full text-sm justify-start">
+          <Button
+            variant="outline"
+            className="max-w-[150px] w-full text-sm justify-start"
+          >
             {value ? <>{value.label}</> : <> </>}
           </Button>
         </PopoverTrigger>
         <PopoverContent className="p-0" side="right" align="start">
           <Command>
-            <CommandInput className="text-sm" onValueChange={e => {}} placeholder={placeholder} />
+            <CommandInput
+              className="text-sm"
+              onValueChange={e => {}}
+              placeholder={placeholder}
+            />
             <CommandList>
-              <CommandEmpty className="text-sm p-4">No results found.</CommandEmpty>
+              <CommandEmpty className="text-sm p-4">
+                No results found.
+              </CommandEmpty>
               <CommandGroup>
                 {data.map(item => (
                   <CommandItem
