@@ -43,7 +43,7 @@ const Bills = async () => {
       <TableBill
         initialClient={currentClient}
         clients={clients}
-        data={bills.items}
+        data={bills?.items}
       />
     </div>
   );
