@@ -1,6 +1,8 @@
 import { Field, Float, InputType, ObjectType } from 'type-graphql';
 
 import { BillItemInput } from '../bill_item/bill_item.types';
+import { Bill } from '../../models/bill.model';
+import { Paginate, PaginateInput } from '../../app/app.types';
 
 @ObjectType()
 @InputType()
@@ -25,4 +27,21 @@ export class BillInput {
 
   @Field()
   file: string;
+}
+
+@ObjectType()
+@InputType()
+export class Bills {
+  @Field(() => [Bill], { defaultValue: [] })
+  items: Bill[];
+
+  @Field(() => Paginate)
+  meta: Paginate;
+}
+
+@ObjectType()
+@InputType()
+export class SearchBillInput extends PaginateInput {
+  @Field(() => String)
+  client: string;
 }

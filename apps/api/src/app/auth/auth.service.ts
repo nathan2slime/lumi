@@ -85,13 +85,15 @@ export class AuthService {
 
       if (token) {
         const data = this.tokenService.decode<AuthToken>(token);
-        console.log(data);
 
         if (!data) throw err;
 
         const user = await this.userService.findById(data.user);
         if (!user) throw err;
 
+        const isValid = !!user.tokens.find(e => e.value == token);
+        if (!isValid) throw err;
+        
         logger.info('user authorized', { user: user.id });
 
         return user;

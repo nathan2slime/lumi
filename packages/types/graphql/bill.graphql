@@ -21,3 +21,37 @@ mutation CreateBill($data: BillInput!) {
     }
   }
 }
+
+query Bills($data: SearchBillInput!) {
+  Bills(data: $data) {
+    items {
+      id
+      total_price
+      due_date
+      public_lighting_contribution
+      file
+      date
+      created_at
+      updated_at
+      deleted_at
+      client {
+        number
+        id
+      }
+      items {
+        id
+        amount
+        type
+        unit_price
+        price
+      }
+    }
+    meta {
+      totalItems
+      itemCount
+      itemsPerPage
+      totalPages
+      currentPage
+    }
+  }
+}

@@ -200,6 +200,7 @@ describe('AuthService', () => {
 
     it('must return the user by token', async () => {
       const token = faker.string.binary();
+      user.tokens = [{ value: token } as TokenEntity];
 
       jest.spyOn(tokenService, 'decode').mockReturnValue({ user: user.id });
       jest.spyOn(userService, 'findById').mockResolvedValue(user);

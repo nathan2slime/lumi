@@ -4,9 +4,9 @@ import { PermissionEnum } from '@lumi/database';
 
 import { BillService } from './bill.service';
 
+import { BillInput, Bills, SearchBillInput } from './bill.types';
 import { ContextDataType } from '../../guard/types';
 import { Bill } from '../../models/bill.model';
-import { BillInput } from './bill.types';
 
 @Injectable()
 @Resolver()
@@ -19,6 +19,8 @@ export class BillResolver {
     return await this.billService.create(data, ctx.token);
   }
 
-  @Query(() => [Bill], { name: 'Bills' })
-  async find() {}
+  @Query(() => Bills, { name: 'Bills' })
+  async search(@Arg('data') data: SearchBillInput) {
+    return await this.billService.search(data);
+  }
 }

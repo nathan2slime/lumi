@@ -12,7 +12,6 @@ const bootstrap = async () => {
     await app.select(CommandModule).get(CommandService).exec();
     await app.close();
   } catch (_) {
-    console.log(_);
     await app.close();
     process.exit(1);
   }

@@ -2,7 +2,7 @@ import { tv } from 'tailwind-variants';
 
 export const styles = tv({
   slots: {
-    wrapper: 'w-full h-full py-10 relative flex justify-center items-center',
+    wrapper: 'w-full py-10 relative flex justify-center items-center',
     form: 'max-w-lg w-full shadow-none p-5',
     content: 'flex flex-col justify-start items-center pt-7',
     row: 'flex w-full gap-3',

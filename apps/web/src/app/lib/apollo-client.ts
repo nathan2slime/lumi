@@ -8,7 +8,7 @@ import { registerApolloClient } from '@apollo/experimental-nextjs-app-support/rs
 export const { getClient } = registerApolloClient(
   () =>
     new NextSSRApolloClient({
-      cache: new NextSSRInMemoryCache(),
+      cache: new NextSSRInMemoryCache({}),
       link: new HttpLink({
         uri: process.env.NEXT_PUBLIC_APP_API_URL,
       }),
