@@ -1,7 +1,3 @@
-import { Bill, Client } from '@lumi/types';
+import { Bills, Client } from '@lumi/types';
 
-export type TableBillProps = {
-  data: Bill[];
-  clients: Client[];
-  initialClient: string;
-};
+export type TableBillProps = {};

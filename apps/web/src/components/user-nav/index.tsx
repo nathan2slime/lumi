@@ -35,7 +35,7 @@ export const UserNav = ({ permissions }: UserNavProps) => {
   const onLogout = () => {
     auth.setLogged(false);
     localStorage.clear();
-    router.push('/auth/login');
+    router.push('/auth/signin');
   };
 
   return (

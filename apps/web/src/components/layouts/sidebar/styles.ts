@@ -5,15 +5,18 @@ export const styles = tv({
     open: {
       true: {
         itemText: 'opacity-1',
-        wrapper: 'max-w-[200px]',
+        toggleIcon: '-rotate-180 md:rotate-0',
+        wrapper: 'md:max-w-[200px] opacity-100',
       },
       false: {
-        wrapper: 'max-w-[90px]',
+        wrapper:
+          'z-20 md:static absolute opacity-0 md:opacity-100 max-w-[120px] md:translate-x-0 md:max-w-[90px]',
         itemText: 'opacity-0',
         items: 'justify-center',
         itemIcon: 'flex-shrink-0 w-6',
-        toggle: '-right-6',
-        toggleIcon: '-rotate-180 transform transition ease-in-out duration-300',
+        toggle: 'right-0 md:-right-6',
+        toggleIcon:
+          'md:-rotate-180 transform transition ease-in-out duration-300',
       },
     },
   },
@@ -28,7 +31,7 @@ export const styles = tv({
     toggleIcon: 'h-4 w-4',
     itemText: 'transition-opacity delay-200 duration-100',
     wrapper:
-      'flex flex-col relative w-full p-4 justify-between gap-8 transition-[max-width] ease-in-out duration-300 h-full bg-background border-r-border border-r',
+      'flex flex-col relative w-full p-4 justify-between gap-8 transition-all ease-in-out duration-300 h-full bg-background border-r-border border-r',
   },
   defaultVariants: {
     open: true,

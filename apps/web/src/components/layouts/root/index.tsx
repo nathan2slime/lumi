@@ -1,10 +1,10 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-
-import { ScrollArea } from '@/components/ui/scroll-area';
+import { useState } from 'react';
 
 import { Sidebar } from '../sidebar';
+import { Navbar } from '../navbar';
 
 import { AppChildren } from '@/types';
 import { cn } from '@/lib/utils';
@@ -12,6 +12,8 @@ import { cn } from '@/lib/utils';
 import { styles } from './styles';
 
 export const RootLayout = ({ children }: AppChildren) => {
+  const [isOpenSidebar, setIsOpenSidebar] = useState(false);
+
   const pathname = usePathname();
 
   const style = styles();
@@ -22,9 +24,16 @@ export const RootLayout = ({ children }: AppChildren) => {
 
   return (
     <div className={style.wrapper()}>
-      <Sidebar />
+      <Sidebar open={isOpenSidebar} onToggleOpen={e => setIsOpenSidebar(e)} />
 
-      <div className={cn(style.page())}>{children}</div>
+      <div className={cn(style.page())}>
+        <Navbar
+          isOpenSidebar={isOpenSidebar}
+          onToggle={e => setIsOpenSidebar(e)}
+        />
+
+        {children}
+      </div>
     </div>
   );
 };

@@ -17,6 +17,16 @@ const makeClient = () => {
   const isServer = typeof window === 'undefined';
 
   return new NextSSRApolloClient({
+    defaultOptions: {
+      watchQuery: {
+        fetchPolicy: 'no-cache',
+        errorPolicy: 'ignore',
+      },
+      query: {
+        fetchPolicy: 'no-cache',
+        errorPolicy: 'all',
+      },
+    },
     cache: new NextSSRInMemoryCache({}),
     link: isServer
       ? ApolloLink.from([

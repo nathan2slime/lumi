@@ -63,6 +63,8 @@ export const AuthProvider = ({ children }: AppChildren) => {
   }, []);
 
   const onGuard = () => {
+    if (pathname.includes('auth') && auth.logged) router.push('/bills');
+
     const route = protectedRoutes.find(route => pathname == route.path);
 
     if (!!route) {
