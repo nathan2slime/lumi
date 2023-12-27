@@ -12,7 +12,7 @@ type Bill {
   file: String!
   id: String!
   items: [BillItem!]!
-  public_lighting_contribution: Float!
+  public_lighting_contribution: Float
   total_price: Float!
   updated_at: DateTime
 }
@@ -46,6 +46,11 @@ input BillItemInput {
   unit_price: Float!
 }
 
+type Bills {
+  items: [Bill!]!
+  meta: Paginate!
+}
+
 type Client {
   address: String
   bills: [Bill!]!
@@ -56,6 +61,11 @@ type Client {
   number: String!
   updated_at: DateTime
   user: User!
+}
+
+type Clients {
+  items: [Client!]!
+  meta: Paginate!
 }
 
 """
@@ -69,6 +79,14 @@ type Mutation {
   SignUp(data: SignUpInput!): User!
 }
 
+type Paginate {
+  currentPage: Float!
+  itemCount: Float!
+  itemsPerPage: Float!
+  totalItems: Float
+  totalPages: Float
+}
+
 type Permission {
   created_at: DateTime!
   deleted_at: DateTime
@@ -79,7 +97,8 @@ type Permission {
 
 type Query {
   Auth: User!
-  Bills: [Bill!]!
+  Bills(data: SearchBillInput!): Bills!
+  Clients(data: SearchClientInput!): Clients!
 }
 
 type Role {
@@ -90,6 +109,18 @@ type Role {
   permissions: [Permission!]!
   updated_at: DateTime
   user: User!
+}
+
+input SearchBillInput {
+  client: String!
+  limit: Float!
+  page: Float!
+}
+
+input SearchClientInput {
+  limit: Float!
+  number: String!
+  page: Float!
 }
 
 input SignInInput {

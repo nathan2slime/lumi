@@ -1,8 +1,10 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { User } from '@lumi/types';
+import { PermissionEnum } from '@lumi/database/enums';
 
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -21,13 +23,20 @@ import { useAuthState } from '@/store/auth';
 import { getAvatarFallback } from '@/utils/funcs';
 
 import { styles } from './styles';
+import { UserNavProps } from './model';
 
-export const UserNav = () => {
+export const UserNav = ({ permissions }: UserNavProps) => {
   const auth = useAuthState();
-
+  const router = useRouter();
   const user = auth.data as User;
 
   const style = styles();
+
+  const onLogout = () => {
+    auth.setLogged(false);
+    localStorage.clear();
+    router.push('/auth/login');
+  };
 
   return (
     <DropdownMenu dir="rtl">
@@ -50,18 +59,17 @@ export const UserNav = () => {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-          <Link href="/new-bill">
-            <DropdownMenuItem className={style.item()}>
-              New bill
-            </DropdownMenuItem>
-          </Link>
-        </DropdownMenuGroup>
+        {permissions.includes(PermissionEnum.ADMINISTRATOR) && (
+          <DropdownMenuGroup>
+            <Link href="/new-bill">
+              <DropdownMenuItem className={style.item()}>
+                New bill
+              </DropdownMenuItem>
+            </Link>
+          </DropdownMenuGroup>
+        )}
         <DropdownMenuSeparator />
-        <DropdownMenuItem
-          onClick={() => auth.setLogged(false)}
-          className={style.item()}
-        >
+        <DropdownMenuItem onClick={() => onLogout()} className={style.item()}>
           Log out
         </DropdownMenuItem>
       </DropdownMenuContent>

@@ -1,12 +1,16 @@
-import { ref, uploadBytesResumable } from 'firebase/storage';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { BillItemTypeEnum } from '@lumi/database/enums';
 import { parse, subMonths } from 'date-fns';
 import {
   BillInput,
   BillItemInput,
+  BillsDocument,
+  BillsQuery,
+  BillsQueryVariables,
   CreateBillDocument,
   CreateBillMutation,
   CreateBillMutationVariables,
+  SearchBillInput,
 } from '@lumi/types';
 
 import {
@@ -108,3 +112,24 @@ export const createNewBillService = async ({
       data,
     },
   });
+
+export const searchBillsService = async ({
+  data,
+  ...args
+}: AppService<SearchBillInput>) =>
+  await graphql<BillsQuery, BillsQueryVariables>({
+    ...args,
+    query: BillsDocument,
+    type: 'query',
+    variables: {
+      data,
+    },
+  });
+
+export const downloadBillService = async (file: string, client: string) => {
+  const storageRef = ref(storage, file);
+
+  const res = await getDownloadURL(storageRef);
+
+  window.open(res, '__blank');
+};

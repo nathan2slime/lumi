@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { paginate } from 'nestjs-typeorm-paginate';
 import { BillEntity } from '@lumi/database';
 import { Repository } from 'typeorm';
 import { logger } from '@lumi/log';
@@ -8,7 +9,8 @@ import { BillItemService } from '../bill_item/bill_item.service';
 import { ClientService } from '../client/client.service';
 import { AuthService } from '../auth/auth.service';
 
-import { BillInput } from './bill.types';
+import { BillInput, SearchBillInput } from './bill.types';
+import { PaginateInput } from 'app/app.types';
 
 @Injectable()
 export class BillService {
@@ -68,6 +70,34 @@ export class BillService {
       return bill;
     } catch (error) {
       logger.error('error finding bill by id', { id, error });
+
+      throw error;
+    }
+  }
+
+  async search(data: SearchBillInput) {
+    try {
+      const { limit, page, client: title } = data;
+      logger.info('starting invoice search', data);
+
+      const res = await paginate(
+        this.billRepository,
+        { limit, page },
+        {
+          where: {
+            client: { number: title },
+          },
+          relations: {
+            client: true,
+            items: true,
+          },
+        },
+      );
+
+      logger.info('finished invoice search', res.meta);
+      return res;
+    } catch (error) {
+      logger.error('error in invoice search', { data, error });
 
       throw error;
     }

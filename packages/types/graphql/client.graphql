@@ -1,0 +1,18 @@
+query Clients($data: SearchClientInput!) {
+  Clients(data: $data) {
+    items {
+      id
+      number
+      created_at
+      updated_at
+      deleted_at
+    }
+    meta {
+      totalItems
+      itemCount
+      itemsPerPage
+      totalPages
+      currentPage
+    }
+  }
+}

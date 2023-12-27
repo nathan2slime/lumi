@@ -69,23 +69,27 @@ const NewBill = ({}: UploadBillProps) => {
       if (files.length <= 0) return;
       const file = files[0];
 
-      const res = await uploadBillFileService(file, uuid, (progress: number) =>
-        setUploadProgress(progress),
-      );
+      if (file.type == 'application/pdf') {
+        const res = await uploadBillFileService(
+          file,
+          uuid,
+          (progress: number) => setUploadProgress(progress),
+        );
 
-      if (res) {
-        toast.success('Invoice upload done');
+        if (res) {
+          toast.success('Invoice upload done');
 
-        const billDetail = await onGetDetails(uuid);
-        if (billDetail) onParserBill(billDetail, uuid);
+          const billDetail = await onGetDetails(uuid);
+          if (billDetail) onParserBill(billDetail, uuid);
 
-        setUploadProgress(0);
-        setIsLoading(false);
+          setUploadProgress(0);
+          setIsLoading(false);
 
-        return;
+          return;
+        }
+
+        toast.error('Failed to upload invoice');
       }
-
-      toast.error('Failed to upload invoice');
     }
 
     setIsLoading(false);
@@ -143,12 +147,13 @@ const NewBill = ({}: UploadBillProps) => {
           token: token.value,
         });
 
+        toast.dismiss(loading);
+
         if (res) {
           setIsLoading(false);
           setIsReady(false);
           reset({});
 
-          toast.dismiss(loading);
           toast.success('New bill created');
         }
       }

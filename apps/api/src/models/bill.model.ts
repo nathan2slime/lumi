@@ -16,7 +16,7 @@ export class Bill extends BaseModel {
   @Field(() => [BillItem], { defaultValue: [] })
   items: BillItem[];
 
-  @Field(() => Float)
+  @Field(() => Float, { nullable: true })
   public_lighting_contribution: number;
 
   @Field()

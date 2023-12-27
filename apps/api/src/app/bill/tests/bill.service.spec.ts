@@ -19,7 +19,7 @@ import { UserService } from '../..//user/user.service';
 import { BillService } from '../bill.service';
 
 import { BillItemInput } from '../../bill_item/bill_item.types';
-import { BillInput } from '../bill.types';
+import { BillInput, SearchBillInput } from '../bill.types';
 
 describe('BillService', () => {
   let billRepository: Repository<BillEntity>;
@@ -197,6 +197,27 @@ describe('BillService', () => {
       });
       expect(billRepository.findOne).toHaveReturnedTimes(1);
       expect(res).toMatchObject(new Error(error));
+    });
+  });
+
+  describe('search', () => {
+    const payload: SearchBillInput = {
+      client: expect.any(String),
+      limit: 10,
+      page: 1,
+    };
+
+    it('should return search results', async () => {
+      const bills = [{}, {}, {}] as BillEntity[];
+
+      jest
+        .spyOn(billRepository, 'find')
+        .mockImplementation(async where => bills);
+
+      const res = await billService.search(payload);
+
+      expect(res.items).toMatchObject(bills);
+      expect(billRepository.find).toHaveReturnedTimes(1);
     });
   });
 });

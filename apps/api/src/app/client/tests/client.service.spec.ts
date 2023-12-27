@@ -5,7 +5,7 @@ import { Repository, UpdateResult } from 'typeorm';
 import { faker } from '@faker-js/faker';
 
 import { ClientService } from '../client.service';
-import { ClientInput } from '../client.types';
+import { ClientInput, SearchClientInput } from '../client.types';
 
 describe('ClientService', () => {
   let clientRepository: Repository<ClientEntity>;
@@ -193,6 +193,27 @@ describe('ClientService', () => {
 
       expect(res).toBeUndefined();
       expect(clientRepository.softDelete).toHaveBeenCalledWith({ id });
+    });
+  });
+
+  describe('search', () => {
+    const payload: SearchClientInput = {
+      limit: 10,
+      number: expect.any(String),
+      page: 1,
+    };
+
+    it('should return search results', async () => {
+      const clients = [{}, {}, {}] as ClientEntity[];
+
+      jest
+        .spyOn(clientRepository, 'find')
+        .mockImplementation(async where => clients);
+
+      const res = await clientService.search(payload);
+
+      expect(res.items).toMatchObject(clients);
+      expect(clientRepository.find).toHaveReturnedTimes(1);
     });
   });
 });

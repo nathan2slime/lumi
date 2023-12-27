@@ -17,7 +17,7 @@ const makeClient = () => {
   const isServer = typeof window === 'undefined';
 
   return new NextSSRApolloClient({
-    cache: new NextSSRInMemoryCache(),
+    cache: new NextSSRInMemoryCache({}),
     link: isServer
       ? ApolloLink.from([
           new SSRMultipartLink({

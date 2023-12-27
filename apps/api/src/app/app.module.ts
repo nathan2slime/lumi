@@ -11,12 +11,13 @@ import { TokenModule } from './token/token.module';
 import { UserModule } from './user/user.module';
 import { SeedModule } from './seed/seed.module';
 import { HealthModule } from './health/health.module';
+import { BillModule } from './bill/bill.module';
+import { ClientModule } from './client/client.module';
 
 import { AuthService } from './auth/auth.service';
 
 import { customAuthChecker, getAuthContext } from '../guard';
 import { ContextPayloadType } from '../guard/types';
-import { BillModule } from './bill/bill.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { BillModule } from './bill/bill.module';
         TokenModule,
         UserModule,
         BillModule,
+        ClientModule,
         AuthModule,
         HealthModule,
       ],

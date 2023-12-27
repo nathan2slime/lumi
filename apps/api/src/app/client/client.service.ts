@@ -1,10 +1,15 @@
 import { ClientEntity, UserEntity } from '@lumi/database';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { logger } from '@lumi/log';
+import { paginate } from 'nestjs-typeorm-paginate';
 
-import { ClientInput, UpdateClientInput } from './client.types';
+import {
+  ClientInput,
+  SearchClientInput,
+  UpdateClientInput,
+} from './client.types';
 
 @Injectable()
 export class ClientService {
@@ -75,6 +80,30 @@ export class ClientService {
       logger.info('client deleted successfully', { id });
     } catch (error) {
       logger.error('error deleting client', { id, error });
+
+      throw error;
+    }
+  }
+
+  async search(data: SearchClientInput) {
+    try {
+      const { limit, page, number } = data;
+      logger.info('starting client search', data);
+
+      const res = await paginate(
+        this.clientRepository,
+        { limit, page },
+        {
+          where: {
+            number: Like(`%${number}%`),
+          },
+        },
+      );
+
+      logger.info('finished client search', res.meta);
+      return res;
+    } catch (error) {
+      logger.error('error in client search', { data, error });
 
       throw error;
     }

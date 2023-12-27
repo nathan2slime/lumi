@@ -1,7 +1,10 @@
+import toast from 'react-hot-toast';
+
 import { ssrClient } from '@/app/lib/apollo-provider';
 
 import { AppRequest } from './types';
-import toast from 'react-hot-toast';
+
+const isServer = typeof window == 'undefined';
 
 const graphql = async <F, T extends object>({
   query,
@@ -32,7 +35,8 @@ const graphql = async <F, T extends object>({
 
     if (data) return data;
   } catch (error) {
-    if (notify) {
+    if (notify && !isServer) {
+      toast.dismiss();
       const message = (error as Error).message;
 
       toast.error(message);
