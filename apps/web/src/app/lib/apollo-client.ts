@@ -8,6 +8,16 @@ import { registerApolloClient } from '@apollo/experimental-nextjs-app-support/rs
 export const { getClient } = registerApolloClient(
   () =>
     new NextSSRApolloClient({
+      defaultOptions: {
+        watchQuery: {
+          fetchPolicy: 'no-cache',
+          errorPolicy: 'ignore',
+        },
+        query: {
+          fetchPolicy: 'no-cache',
+          errorPolicy: 'all',
+        },
+      },
       cache: new NextSSRInMemoryCache({}),
       link: new HttpLink({
         uri: process.env.NEXT_PUBLIC_APP_API_URL,

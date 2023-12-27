@@ -46,12 +46,16 @@ export function ComboboxPopover({
         <PopoverTrigger asChild>
           <Button
             variant="outline"
-            className="max-w-[150px] w-full text-sm justify-start"
+            className="max-w-[186px] w-full text-sm justify-start"
           >
             {value ? <>{value.label}</> : <> </>}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="p-0" side="right" align="start">
+        <PopoverContent
+          className="p-0 max-w-[200px]"
+          side="bottom"
+          align="start"
+        >
           <Command>
             <CommandInput
               className="text-sm"

@@ -1,5 +1,5 @@
 'use client';
-import { Bills } from '@lumi/types';
+
 import {
   LineChart,
   YAxis,
@@ -11,39 +11,30 @@ import {
   Label,
   Legend,
   LegendProps,
+  ResponsiveContainer,
 } from 'recharts';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { format, toDate, isAfter } from 'date-fns';
 import { CommitIcon } from '@radix-ui/react-icons';
 
 import { Card } from '../ui/card';
 import { Separator } from '../ui/separator';
 
-import { useBillState } from '@/store/bill';
+import { useStatState } from '@/store/stat';
 
 import { ChartProps } from './model';
 import { chartPriceConfig } from './utils';
 import { styles } from './styles';
 
-export const Chart = ({ type, label, ...props }: ChartProps) => {
-  const [bills, setBills] = useState(props.bills ? props.bills.items : []);
+export const Chart = ({ type, label }: ChartProps) => {
   const style = styles();
 
-  const billState = useBillState();
+  const statState = useStatState();
 
-  useEffect(() => {
-    if (billState.items) setBills(billState.items);
-  }, [billState.items]);
-
-  const values = bills
-    .map(
-      ({
-        total_price,
-        public_lighting_contribution,
-        date,
-        due_date,
-        items,
-      }) => {
+  const values =
+    statState?.items &&
+    statState.items
+      .map(({ total_price, date, due_date, items }) => {
         const extra = items.reduce(
           (acc, { type: key, ...currentValue }) => {
             acc[key.toLocaleLowerCase()] =
@@ -56,22 +47,20 @@ export const Chart = ({ type, label, ...props }: ChartProps) => {
 
         return {
           ...extra,
-          total_price,
+          total_price: type == 'price' ? total_price : undefined,
           date: format(date, 'MM/yy'),
           due_date,
-          public_lighting_contribution,
         };
-      },
-    )
-    .sort((prev, current) => {
-      const a = toDate(prev.date);
-      const b = toDate(current.date);
+      })
+      .sort((prev, current) => {
+        const a = toDate(prev.date);
+        const b = toDate(current.date);
 
-      if (isAfter(b, a)) return -1;
-      if (isAfter(a, b)) return 1;
+        if (isAfter(b, a)) return -1;
+        if (isAfter(a, b)) return 1;
 
-      return 1;
-    });
+        return 1;
+      });
 
   const PriceTooltip = ({
     active,
@@ -140,68 +129,65 @@ export const Chart = ({ type, label, ...props }: ChartProps) => {
       <Card className={style.graphic()}>
         <h5 className={style.title()}>{label}</h5>
 
-        <LineChart
-          width={500}
-          margin={{ bottom: 10 }}
-          height={500}
-          data={values}
-        >
-          <YAxis fontSize="0.82rem" className="text-sm" />
-          <XAxis
-            fontSize="0.82rem"
-            dataKey="date"
-            padding={{ left: 30, right: 30 }}
-          >
-            <Label
-              fontSize="0.88rem"
-              fontWeight="medium"
-              offset={10}
-              position="bottom"
+        <ResponsiveContainer height={400}>
+          <LineChart margin={{ bottom: 10 }} data={values}>
+            <YAxis fontSize="0.82rem" className="text-sm" />
+            <XAxis
+              fontSize="0.82rem"
+              dataKey="date"
+              padding={{ left: 30, right: 30 }}
             >
-              Date
-            </Label>
-          </XAxis>
+              <Label
+                fontSize="0.88rem"
+                fontWeight="medium"
+                offset={10}
+                position="bottom"
+              >
+                Date
+              </Label>
+            </XAxis>
 
-          <Legend
-            align="center"
-            content={props => <LegendContent {...(props as LegendProps)} />}
-          />
+            <Legend
+              align="center"
+              content={props => <LegendContent {...(props as LegendProps)} />}
+            />
 
-          <Tooltip content={PriceTooltip} />
+            <Tooltip content={PriceTooltip} />
 
-          <CartesianGrid stroke="#cfcfcf" strokeDasharray="9 9" />
+            <CartesianGrid stroke="#cfcfcf" strokeDasharray="9 9" />
 
-          <Line
-            type="monotone"
-            dataKey="total_price"
-            name={chartPriceConfig.total_price.label}
-            stroke={chartPriceConfig.total_price.color}
-          />
-          <Line
-            type="monotone"
-            dataKey="public_lighting_contribution"
-            name={chartPriceConfig.public_lighting_contribution.label}
-            stroke={chartPriceConfig.public_lighting_contribution.color}
-          />
-          <Line
-            type="monotone"
-            dataKey="energy"
-            name={chartPriceConfig.energy.label}
-            stroke={chartPriceConfig.energy.color}
-          />
-          <Line
-            type="monotone"
-            dataKey="compensed_energy"
-            name={chartPriceConfig.compensed_energy.label}
-            stroke={chartPriceConfig.compensed_energy.color}
-          />
-          <Line
-            type="monotone"
-            dataKey="energy_without_icms_value"
-            name={chartPriceConfig.energy_without_icms_value.label}
-            stroke={chartPriceConfig.energy_without_icms_value.color}
-          />
-        </LineChart>
+            <Line
+              type="monotone"
+              dataKey="total_price"
+              name={chartPriceConfig.total_price.label}
+              stroke={chartPriceConfig.total_price.color}
+            />
+            <Line
+              type="monotone"
+              dataKey="public_lighting_contribution"
+              name={chartPriceConfig.public_lighting_contribution.label}
+              stroke={chartPriceConfig.public_lighting_contribution.color}
+            />
+            <Line
+              type="monotone"
+              dataKey="energy"
+              name={chartPriceConfig.energy.label}
+              stroke={chartPriceConfig.energy.color}
+            />
+            <Line
+              type="monotone"
+              dataKey="compensed_energy"
+              name={chartPriceConfig.compensed_energy.label}
+              stroke={chartPriceConfig.compensed_energy.color}
+            />
+            <Line
+              type="monotone"
+              dataKey="energy_without_icms_value"
+              name={chartPriceConfig.energy_without_icms_value.label}
+              stroke={chartPriceConfig.energy_without_icms_value.color}
+            />
+          </LineChart>
+        </ResponsiveContainer>
       </Card>
     </div>
   );

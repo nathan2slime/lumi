@@ -1,5 +1,5 @@
-import { Bill, Client } from '@lumi/types';
-import { CaretSortIcon, DotsHorizontalIcon } from '@radix-ui/react-icons';
+import { Bill } from '@lumi/types';
+import { DotsHorizontalIcon } from '@radix-ui/react-icons';
 import { ColumnDef } from '@tanstack/react-table';
 import { format } from 'date-fns';
 
@@ -17,38 +17,16 @@ import { downloadBillService } from '@/services/bill.services';
 export const columns: ColumnDef<Bill>[] = [
   {
     accessorKey: 'date',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Date
-          <CaretSortIcon className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: 'Date',
     cell: ({ row }) => (
-      <div className="lowercase pl-4">
-        {format(row.getValue('date'), 'MM/yy')}
-      </div>
+      <div className="lowercase">{format(row.getValue('date'), 'MM/yy')}</div>
     ),
   },
   {
     accessorKey: 'due_date',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Due date
-          <CaretSortIcon className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: 'Due date',
     cell: ({ row }) => (
-      <div className="lowercase pl-4">
+      <div className="lowercase">
         {format(row.getValue('due_date'), 'dd/MM/yy')}
       </div>
     ),

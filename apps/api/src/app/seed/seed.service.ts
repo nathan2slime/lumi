@@ -50,7 +50,6 @@ export class SeedService {
       );
     } catch (error) {
       logger.error(error);
-      process.exit(1);
     }
   }
 
@@ -88,8 +87,6 @@ export class SeedService {
       logger.info('success', 'user created', payload);
     } catch (error) {
       logger.error(error);
-
-      process.exit(1);
     }
   }
 }

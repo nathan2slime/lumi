@@ -23,14 +23,13 @@ import { items } from './utils';
 
 import Energy from '@/assets/energy.svg';
 
-export const Sidebar = ({}: SidebarProps) => {
+export const Sidebar = ({ open, onToggleOpen }: SidebarProps) => {
   const pathname = usePathname();
-  const [open, setOpen] = useState(true);
   const { data: user } = useAuthState();
 
   const style = styles({ open });
 
-  const onToggle = () => setOpen(!open);
+  const onToggle = () => onToggleOpen(!open);
 
   const userRoles = user && user.roles;
   const userPermissions = userRoles

@@ -10,25 +10,27 @@ import { useStatState } from '@/store/stat';
 import { FilterBillProps } from './model';
 import { styles } from './styles';
 
-export const FilterBill = ({ clients = [], client }: FilterBillProps) => {
-  const initialClient = client && {
-    label: client,
-    value: client,
-  };
-
-  const billState = useStatState();
+export const FilterBill = ({}: FilterBillProps) => {
+  const statState = useStatState();
   const style = styles();
 
-  const comboboxData = clients.map(e => ({ label: e.number, value: e.number }));
-  const currentClient = billState.client
+  const initialClient = statState.client && {
+    label: statState.client,
+    value: statState.client,
+  };
+  const comboboxData = statState.clients.map(e => ({
+    label: e.number,
+    value: e.number,
+  }));
+  const currentClient = statState.client
     ? {
-        label: billState.client,
-        value: billState.client,
+        label: statState.client,
+        value: statState.client,
       }
     : initialClient;
 
   const onChange = async (e: ComboboxItem) => {
-    billState.setClient(e.value);
+    statState.setClient(e.value);
 
     const res = await searchBillsService({
       data: { limit: 12, client: e.value, page: 1 },
@@ -37,7 +39,7 @@ export const FilterBill = ({ clients = [], client }: FilterBillProps) => {
     if (res) {
       const { items, meta } = res.Bills;
 
-      billState.setBill({ items: items as Bill[], meta });
+      statState.setBill({ items: items as Bill[], meta });
     }
   };
 
@@ -45,10 +47,10 @@ export const FilterBill = ({ clients = [], client }: FilterBillProps) => {
     <div className={style.wrapper()}>
       <h2 className={style.title()}>Stats</h2>
 
-      {currentClient && (
+      {statState?.client && (
         <ComboboxPopover
           data={comboboxData}
-          value={currentClient}
+          value={currentClient as ComboboxItem}
           placeholder="Search client"
           label="Set client"
           onChange={e => e && onChange(e)}

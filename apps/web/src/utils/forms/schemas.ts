@@ -15,6 +15,11 @@ const signup = signin.merge(
     surname: z.string({
       required_error,
     }),
+    password: z
+      .string({
+        required_error,
+      })
+      .min(6, 'Minimum 6 characters'),
     name: z.string({
       required_error,
     }),

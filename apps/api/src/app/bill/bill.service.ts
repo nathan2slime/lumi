@@ -32,7 +32,7 @@ export class BillService {
 
       const client = await this.clientService.create(
         {
-          number: payload.client,
+          number: payload.client.trim(),
         },
         user,
       );
@@ -40,6 +40,7 @@ export class BillService {
       const bill = await this.billRepository.save({
         client,
         total_price: payload.total_price,
+        public_lighting_contribution: payload.public_lighting_contribution,
         due_date: payload.due_date,
         date: payload.date,
         file: payload.file,

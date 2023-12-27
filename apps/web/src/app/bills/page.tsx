@@ -1,50 +1,62 @@
+'use client';
+
 import { Bills, Client } from '@lumi/types';
+import { useEffect } from 'react';
 
 import { TableBill } from '@/components/table-bill';
+import { FilterTable } from '@/components/filter-table';
 
 import { searchClientsService } from '@/services/client.services';
 import { searchBillsService } from '@/services/bill.services';
 
-import { getClient } from '../lib/apollo-client';
+import { useBillState } from '@/store/bill';
 
 import { styles } from './styles';
 
-const Bills = async () => {
-  const client = getClient();
+const Bills = () => {
+  const billState = useBillState();
   const style = styles();
 
-  const clientsResponse = await searchClientsService({
-    client,
-    data: { page: 1, limit: 30, number: '' },
-  });
+  const onLoadBills = async () => {
+    const clientsResponse = await searchClientsService({
+      data: { page: 1, limit: 30, number: '' },
+    });
 
-  const clients = (clientsResponse &&
-    clientsResponse.Clients.items) as unknown as Client[];
+    const clients = (clientsResponse &&
+      clientsResponse.Clients.items) as unknown as Client[];
 
-  const currentClient = (clients &&
-    clients.length > 0 &&
-    clients[0].number) as string;
+    if (!!clients) {
+      billState.setClients(clients);
 
-  const billsResponse =
-    currentClient &&
-    (await searchBillsService({
-      client,
-      data: {
-        client: currentClient,
-        limit: 20,
-        page: 1,
-      },
-    }));
+      const currentClient = (clients?.length > 0 &&
+        clients[0].number) as string;
 
-  const bills = (billsResponse && billsResponse.Bills) as Bills;
+      const billsResponse =
+        currentClient &&
+        (await searchBillsService({
+          data: {
+            client: currentClient,
+            limit: 20,
+            page: 1,
+          },
+        }));
+
+      const bills = (billsResponse && billsResponse.Bills) as Bills;
+
+      billState.setClient(currentClient);
+      billState.setBill(bills);
+    }
+  };
+
+  useEffect(() => {
+    onLoadBills();
+  }, []);
 
   return (
     <div className={style.wrapper()}>
-      <TableBill
-        initialClient={currentClient}
-        clients={clients}
-        data={bills?.items}
-      />
+      <FilterTable />
+
+      <TableBill />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import toast from 'react-hot-toast';
 
 import { ssrClient } from '@/app/lib/apollo-provider';
+import { Context } from '@apollo/client';
 
 import { AppRequest } from './types';
 
@@ -14,10 +15,11 @@ const graphql = async <F, T extends object>({
   notify = true,
   client = ssrClient,
 }: AppRequest<T>) => {
-  const context = {
+  const context: Context = {
     headers: {
       Authorization: token,
     },
+    fetchOptions: {},
   };
 
   try {

@@ -72,7 +72,7 @@ export const AuthForm = ({ type }: AuthFormProps) => {
     if (res) {
       auth.setUser(res as User);
       auth.setLogged(true);
-      router.push('/');
+      router.push('/bills');
     }
 
     setLoading(false);

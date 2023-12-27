@@ -127,6 +127,7 @@ describe('BillService', () => {
         client,
         total_price: payload.total_price,
         due_date: payload.due_date,
+        public_lighting_contribution: payload.public_lighting_contribution,
         date: payload.date,
         file: payload.file,
       });
