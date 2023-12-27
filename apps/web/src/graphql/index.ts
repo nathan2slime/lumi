@@ -4,6 +4,8 @@ import { ssrClient } from '@/app/lib/apollo-provider';
 
 import { AppRequest } from './types';
 
+const isServer = typeof window == 'undefined';
+
 const graphql = async <F, T extends object>({
   query,
   type = 'query',
@@ -33,7 +35,7 @@ const graphql = async <F, T extends object>({
 
     if (data) return data;
   } catch (error) {
-    if (notify) {
+    if (notify && !isServer) {
       toast.dismiss();
       const message = (error as Error).message;
 
