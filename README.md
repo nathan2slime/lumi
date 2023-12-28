@@ -38,7 +38,7 @@ You need the following prerequisites installed on your system.
 | `@lumi/service`   | API for extracting data from PDFs, made in Nestjs                                   |
 | `@lumi/database`   | Contains the table models for the database                                   |
 | `@lumi/env`       | Configuration and validation of environment variables      |
-| `@lumi/firebase`  | Loading firebase-admin credentials                          |
+| `@lumi/firebase`  | Load firebase-admin credentials                          |
 | `@lumi/logs`      | Custom logging                                                         |
 
 
@@ -172,7 +172,7 @@ cd lumi
     ```
 
 ### 🔖 Docs
-The extraction API documentation is available in the ```/api/docs``` route and the GraphQL API PLayground GraphQL is available in ```/graphql```. Make sure you put the correct host and port to access them
+The extraction API documentation is available in the ```/api/docs``` route and the GraphQL API Playground GraphQL is available in ```/graphql```. Make sure you put the correct host and port to access them
 
 ### 🤙 Usage
 To interact with the Lumi application, authentication is required. Follow the steps below to manage users and create invoices:
