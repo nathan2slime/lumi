@@ -102,6 +102,8 @@ cd lumi
 
 ### 🚀 Running
 
+> Commands from here are run in the project's root directory
+
 - Using Docker
 
   > Run the command below, make sure the ports configured in .env.prod are available.
