@@ -178,7 +178,7 @@ The extraction API documentation is available in the ```/api/docs``` route and t
 To interact with the Lumi application, authentication is required. Follow the steps below to manage users and create invoices:
 
 1. **User authentication:**
-    - Log in using your admin credentials (You can find them in your .env).
+    - Log in using your admin credentials (You can find them in your ```.env```).
     - If you don't have an admin account, create a regular user account.
 
 2. **Invoice creation:**
