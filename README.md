@@ -44,9 +44,9 @@ You need the following prerequisites installed on your system.
 
 ### 👾 Environment variables
 
-> If you are using Docker, you will not need to configure a .env . I left a file ```.env.prod``` with environment variables needed to run in a Docker environment.
+> If you are using Docker, you will not need to configure a ```.env``` . I left a file ```.env.prod``` with environment variables needed to run in a Docker environment.
 
-> There is a .env.example file where there are examples of how to configure environment variables
+> There is a ```.env.example``` file where there are examples of how to configure environment variables
 
 ```
 ## PostgreSQL
