@@ -106,7 +106,7 @@ cd lumi
 
 - Using Docker
 
-  > Run the command below, make sure the ports configured in .env.prod are available.
+  > Run the command below, make sure the ports configured in ```.env.prod``` are available.
 
   ```
   docker compose up
